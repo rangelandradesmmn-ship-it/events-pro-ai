@@ -40,6 +40,16 @@ export default async function ClientPortalLayout({
     notFound();
   }
 
+  // Fetch Agency Profile for White-label
+  const { data: agencyProfile } = await supabase
+    .from('profiles')
+    .select('full_name, agency_logo_url, agency_color')
+    .eq('id', client.planner_id)
+    .single();
+
+  const brandColor = agencyProfile?.agency_color || '#d4af37'; // fallback to gold-400
+  const agencyName = agencyProfile?.full_name || 'LUXE EVENTS';
+
   const event = client.events && client.events.length > 0 ? client.events[0] : null;
 
   const navItems = [
@@ -68,7 +78,11 @@ export default async function ClientPortalLayout({
       <aside className="hidden w-64 flex-col bg-zinc-900 border-r border-zinc-800 md:flex">
         <div className="flex h-20 items-center border-b border-zinc-800 px-6">
           <Link href={`/portal/${token}`} className="flex flex-col gap-0.5">
-            <span className="font-serif font-bold text-xl text-gold-400 tracking-wide">LUXE EVENTS</span>
+            {agencyProfile?.agency_logo_url ? (
+                <img src={agencyProfile.agency_logo_url} alt={agencyName} className="h-10 object-contain" />
+              ) : (
+                <span className="font-serif font-bold text-xl tracking-wide" style={{ color: brandColor }}>{agencyName.toUpperCase()}</span>
+              )}
             <span className="text-xs text-zinc-400">Área do Cliente</span>
           </Link>
         </div>
@@ -119,7 +133,11 @@ export default async function ClientPortalLayout({
       <main className="flex flex-1 flex-col overflow-hidden h-screen">
         {/* Mobile Header */}
         <header className="flex h-14 items-center gap-4 border-b bg-zinc-900 px-4 md:hidden">
-           <span className="font-serif font-bold text-gold-400 tracking-wide">LUXE EVENTS</span>
+           {agencyProfile?.agency_logo_url ? (
+                <img src={agencyProfile.agency_logo_url} alt={agencyName} className="h-6 object-contain" />
+              ) : (
+                <span className="font-serif font-bold tracking-wide" style={{ color: brandColor }}>{agencyName.toUpperCase()}</span>
+              )}
         </header>
 
         <div className="flex-1 overflow-y-auto">

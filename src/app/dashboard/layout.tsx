@@ -46,6 +46,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
   const activeRoles = [userRole, ...(isSuperadmin ? ['superadmin'] : [])]; // fallback to admin if not set
 
   const allNavItems = [
+    { name: 'Configurações', href: '/dashboard/settings', icon: Settings, roles: ['admin'] },
     { name: 'Sala de Comando', href: '/dashboard/super-admin', icon: ShieldAlert, roles: ['superadmin'] },
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: ['admin', 'planner', 'assistant'] },
     { name: 'Eventos', href: '/dashboard/events', icon: Calendar, roles: ['admin', 'planner', 'assistant', 'team'] },
