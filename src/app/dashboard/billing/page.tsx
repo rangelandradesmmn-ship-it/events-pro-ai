@@ -59,7 +59,7 @@ export default async function BillingPage() {
           </div>
           
           <div className="mb-6">
-            <span className="text-5xl font-black">R$ 97</span>
+            <span className="text-5xl font-black">R$ 59,90</span>
             <span className="text-zinc-400 font-medium">/mês</span>
           </div>
 
