@@ -13,7 +13,7 @@ export default async function SuperAdminPage() {
   if (!user) redirect('/login');
 
   // Verify Super Admin
-  const { data: profile } = await supabase
+  const { data: profile, error } = await supabase
     .from('profiles')
     .select('is_superadmin')
     .eq('id', user.id)
@@ -25,7 +25,7 @@ export default async function SuperAdminPage() {
         <h1 className="text-2xl font-bold text-red-600 mb-4">Acesso Negado (Debug)</h1>
         <p>Parece que o banco de dados não está retornando is_superadmin = true para você.</p>
         <pre className="bg-zinc-100 p-4 mt-4 rounded-md overflow-auto text-sm">
-          {JSON.stringify({ userId: user.id, profile }, null, 2)}
+          {JSON.stringify({ userId: user.id, profile, error }, null, 2)}
         </pre>
       </div>
     );
