@@ -69,18 +69,14 @@ export default async function SuppliersPage() {
                 )}
                 <div className="flex gap-2 mt-2 pt-4 border-t">
                   {supplier.instagram && (
-                    <Button variant="outline" size="sm" className="w-full text-xs h-8" asChild>
-                      <a href={`https://instagram.com/${supplier.instagram.replace('@', '')}`} target="_blank" rel="noreferrer">
+                    <a href={`https://instagram.com/${supplier.instagram.replace('@', '')}`} target="_blank" rel="noreferrer" className="w-full">
+                      <Button variant="outline" size="sm" className="w-full text-xs h-8">
                         <Camera className="mr-2 h-3 w-3" /> Instagram
-                      </a>
-                    </Button>
+                      </Button>
+                    </a>
                   )}
                   {supplier.portfolio_url && (
-                    <Button variant="outline" size="sm" className="w-full text-xs h-8" asChild>
-                      <a href={supplier.portfolio_url} target="_blank" rel="noreferrer">
-                        <Globe className="mr-2 h-3 w-3" /> Portfólio
-                      </a>
-                    </Button>
+                    <a href={supplier.portfolio_url} target="_blank" rel="noreferrer" className="w-full"><Button variant="outline" size="sm" className="w-full text-xs h-8"><Globe className="mr-2 h-3 w-3" /> Portfólio</Button></a>
                   )}
                 </div>
               </CardContent>

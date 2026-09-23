@@ -37,7 +37,7 @@ export function DashboardCharts({ events, transactions }: { events: any[], trans
 
   // 2. Process Transactions for Bar Chart (Last 6 Months)
   const now = new Date();
-  const months = [];
+  const months: any[] = [];
   for (let i = 5; i >= 0; i--) {
     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
     months.push({
@@ -78,7 +78,7 @@ export function DashboardCharts({ events, transactions }: { events: any[], trans
               <RechartsTooltip 
                 cursor={{fill: '#f8fafc'}}
                 contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
-                formatter={(value: number) => [`R$ ${value.toLocaleString('pt-BR', {minimumFractionDigits:2})}`, undefined]}
+                formatter={(value: any, name: any) => [`R$ ${Number(value).toLocaleString('pt-BR', {minimumFractionDigits:2})}`, name]}
               />
               <Legend wrapperStyle={{paddingTop: '20px'}} />
               <Bar dataKey="Receitas" fill="#22c55e" radius={[4, 4, 0, 0]} maxBarSize={40} />
@@ -113,7 +113,7 @@ export function DashboardCharts({ events, transactions }: { events: any[], trans
                 </Pie>
                 <RechartsTooltip 
                   contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
-                  formatter={(value: number) => [`${value} evento(s)`, 'Quantidade']}
+                  formatter={(value: any, name: any) => [`${value} evento(s)`, name]}
                 />
                 <Legend layout="vertical" verticalAlign="middle" align="right" />
               </PieChart>

@@ -27,7 +27,7 @@ export async function processCheckinAction(token: string) {
       guest: {
         name: guest.name,
         companions: guest.companions,
-        eventName: guest.events?.title
+        eventName: Array.isArray(guest.events) ? guest.events[0]?.title : (guest.events as any)?.title
       }
     };
   }
@@ -52,7 +52,7 @@ export async function processCheckinAction(token: string) {
     guest: {
       name: guest.name,
       companions: guest.companions,
-      eventName: guest.events?.title
+      eventName: Array.isArray(guest.events) ? guest.events[0]?.title : (guest.events as any)?.title
     }
   };
 }
