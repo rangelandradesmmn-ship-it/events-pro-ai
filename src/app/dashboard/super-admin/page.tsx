@@ -20,15 +20,7 @@ export default async function SuperAdminPage() {
     .single();
 
   if (!profile?.is_superadmin) {
-    return (
-      <div className="p-10">
-        <h1 className="text-2xl font-bold text-red-600 mb-4">Acesso Negado (Debug)</h1>
-        <p>Parece que o banco de dados não está retornando is_superadmin = true para você.</p>
-        <pre className="bg-zinc-100 p-4 mt-4 rounded-md overflow-auto text-sm">
-          {JSON.stringify({ userId: user.id, profile, error }, null, 2)}
-        </pre>
-      </div>
-    );
+    redirect('/dashboard');
   }
 
   // Fetch all agencies (role = admin)
