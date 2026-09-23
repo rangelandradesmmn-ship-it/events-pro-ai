@@ -3,17 +3,50 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
+import { 
+  Menu,
+  Calendar, 
+  CalendarDays,
+  Users, 
+  Users2,
+  LayoutDashboard, 
+  Settings, 
+  LogOut,
+  Briefcase,
+  CheckSquare,
+  FileText,
+  DollarSign,
+  HeartHandshake,
+  MessageSquare,
+  FolderOpen,
+  QrCode,
+  Heart,
+  Rotate3D,
+  MapPin
+} from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-interface NavItem {
-  name: string;
-  href: string;
-  icon: any;
-}
-
-export function MobileNav({ navItems }: { navItems: NavItem[] }) {
+export function MobileNav({ userRole }: { userRole: string }) {
   const pathname = usePathname();
+
+  const allNavItems = [
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: ['admin', 'planner', 'assistant'] },
+    { name: 'Eventos', href: '/dashboard/events', icon: Calendar, roles: ['admin', 'planner', 'assistant', 'team'] },
+    { name: 'Equipe', href: '/dashboard/team', icon: Briefcase, roles: ['admin'] },
+    { name: 'Clientes', href: '/dashboard/clients', icon: HeartHandshake, roles: ['admin', 'planner', 'assistant'] },
+    { name: 'Convidados (RSVP)', href: '/dashboard/rsvp', icon: Users, roles: ['admin', 'planner', 'assistant'] },
+    { name: 'Mapa de Mesas 2D', href: '/dashboard/tables', icon: Users2, roles: ['admin', 'planner', 'assistant'] },
+    { name: 'Mapa da Cerimônia 3D', href: '/dashboard/ceremony-3d', icon: Rotate3D, roles: ['admin', 'planner', 'assistant'] },
+    { name: 'Reuniões', href: '/dashboard/meetings', icon: MessageSquare, roles: ['admin', 'planner', 'assistant'] },
+    { name: 'Portaria (Scanner)', href: '/dashboard/checkin', icon: QrCode, roles: ['admin', 'planner', 'assistant', 'team'] },
+    { name: 'Cronograma', href: '/dashboard/timeline', icon: CalendarDays, roles: ['admin', 'planner', 'assistant', 'team'] },
+    { name: 'Financeiro', href: '/dashboard/financials', icon: DollarSign, roles: ['admin', 'planner'] },
+    { name: 'Contratos', href: '/dashboard/contracts', icon: FileText, roles: ['admin', 'planner'] },
+    { name: 'Checklists', href: '/dashboard/checklists', icon: CheckSquare, roles: ['admin', 'planner', 'assistant', 'team'] },
+    { name: 'Arquivos', href: '/dashboard/files', icon: FolderOpen, roles: ['admin', 'planner', 'assistant'] },
+  ];
+
+  const navItems = allNavItems.filter(item => item.roles.includes(userRole));
 
   return (
     <Sheet>
