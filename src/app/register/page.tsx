@@ -7,7 +7,7 @@ export default function RegisterPage() {
       {/* Logo */}
       <div className="mb-8 mt-4">
         <Link href="/" className="flex items-center gap-2">
-           <img src="/logo.jpg" alt="Events Pro AI Logo" width="180" height="45" className="object-contain" />
+           <img src="/logo.jpg" alt="Events Pro AI Logo" className="w-[420px] h-auto object-contain mix-blend-multiply" />
         </Link>
       </div>
       
