@@ -38,6 +38,7 @@ export function RegisterForm() {
       email: formData.email,
       password: formData.password,
       options: {
+        emailRedirectTo: `${location.origin}/auth/callback`,
         data: {
           full_name: `${formData.firstName} ${formData.lastName}`.trim(),
           company_name: formData.companyName,
