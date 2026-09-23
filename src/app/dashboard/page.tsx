@@ -78,8 +78,6 @@ export default async function DashboardPage() {
   return (
     <div className="flex flex-col max-w-6xl mx-auto pb-10 space-y-8">
       
-      <DismissibleBanner />
-
       {/* Global Metrics Section */}
       <div className="mb-12">
         <h2 className="text-[28px] font-black tracking-tight text-zinc-900 mb-6 flex items-center gap-3">

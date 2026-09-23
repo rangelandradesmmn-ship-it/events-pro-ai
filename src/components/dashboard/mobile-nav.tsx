@@ -4,7 +4,6 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 interface NavItem {
@@ -18,11 +17,9 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu className="h-6 w-6" />
-          <span className="sr-only">Toggle navigation menu</span>
-        </Button>
+      <SheetTrigger className="md:hidden flex h-10 w-10 items-center justify-center rounded-md hover:bg-zinc-100 text-zinc-900">
+        <Menu className="h-6 w-6" />
+        <span className="sr-only">Toggle navigation menu</span>
       </SheetTrigger>
       <SheetContent side="left" className="w-72 bg-white p-0">
         <div className="flex h-20 items-center px-8 border-b border-zinc-50">
