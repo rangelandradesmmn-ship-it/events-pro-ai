@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { MobileNav } from '@/components/dashboard/mobile-nav';
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   const supabase = await createClient();
@@ -110,8 +111,11 @@ export default async function DashboardLayout({ children }: { children: ReactNod
       <main className="flex flex-1 flex-col">
         {/* Mobile Header (simplified for now) */}
         <header className="flex h-16 items-center gap-4 border-b border-zinc-100 bg-white px-4 lg:h-[60px] lg:px-6 md:hidden">
-           <img src="/logo.jpg" alt="Events Pro AI" className="h-8 object-contain" />
-        </header>
+            <MobileNav navItems={navItems} />
+            <div className="flex-1 flex justify-center">
+              <img src="/logo.jpg" alt="Events Pro AI" className="h-8 object-contain mix-blend-multiply mr-10" />
+            </div>
+          </header>
 
         <div className="flex-1 overflow-auto p-4 md:p-8 lg:p-12">
           {children}
