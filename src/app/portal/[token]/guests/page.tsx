@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server';
+import { createAdminClient as createClient } from '@/utils/supabase/admin';
 import { notFound } from 'next/navigation';
 import { Users, CheckCircle2, Clock, XCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';

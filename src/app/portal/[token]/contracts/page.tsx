@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server';
+import { createAdminClient as createClient } from '@/utils/supabase/admin';
 import { notFound, redirect } from 'next/navigation';
 import { FileText, CheckCircle2, Clock, FileSignature, AlertCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';

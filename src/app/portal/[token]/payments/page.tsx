@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server';
+import { createAdminClient as createClient } from '@/utils/supabase/admin';
 import { notFound } from 'next/navigation';
 
 export default async function PortalUnderConstruction({ params }: { params: Promise<{ token: string }> }) {

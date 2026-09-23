@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server';
+import { createAdminClient as createClient } from '@/utils/supabase/admin';
 import { notFound } from 'next/navigation';
 import { DollarSign, PieChart, ArrowDownCircle, CheckCircle2, Clock, XCircle, TrendingDown } from 'lucide-react';
 

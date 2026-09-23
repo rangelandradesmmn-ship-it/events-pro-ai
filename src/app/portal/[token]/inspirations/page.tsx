@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server';
+import { createAdminClient as createClient } from '@/utils/supabase/admin';
 import { notFound } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { Palette, Image as ImageIcon, Upload, X, Plus } from 'lucide-react';
