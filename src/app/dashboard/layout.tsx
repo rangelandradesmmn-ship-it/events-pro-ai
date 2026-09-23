@@ -67,10 +67,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
       <aside className="hidden w-72 flex-col border-r border-zinc-100 bg-white md:flex shadow-[4px_0_24px_rgba(0,0,0,0.01)]">
         <div className="flex h-20 items-center px-8 border-b border-zinc-50">
           <Link href="/dashboard" className="flex items-center gap-2.5 text-zinc-900 group">
-            <div className="bg-[#F9F0EE] p-2 rounded-xl group-hover:bg-[#A86F6B] transition-colors">
-              <Heart className="h-5 w-5 text-[#A86F6B] fill-[#A86F6B] group-hover:text-white group-hover:fill-white transition-colors" />
-            </div>
-            <span className="font-serif font-black text-2xl tracking-tight">LUXE EVENTS</span>
+            <img src="/logo.png" alt="Events Pro AI" className="h-8 object-contain" />
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-6">
@@ -113,8 +110,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
       <main className="flex flex-1 flex-col">
         {/* Mobile Header (simplified for now) */}
         <header className="flex h-16 items-center gap-4 border-b border-zinc-100 bg-white px-4 lg:h-[60px] lg:px-6 md:hidden">
-           <Heart className="h-5 w-5 text-[#A86F6B] fill-[#A86F6B]" />
-           <span className="font-serif font-black tracking-wide text-lg">LUXE EVENTS</span>
+           <img src="/logo.png" alt="Events Pro AI" className="h-6 object-contain" />
         </header>
 
         <div className="flex-1 overflow-auto p-4 md:p-8 lg:p-12">

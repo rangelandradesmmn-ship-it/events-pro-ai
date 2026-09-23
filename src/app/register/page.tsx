@@ -6,8 +6,8 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-[#F5F2F0] flex flex-col items-center py-10 px-4">
       {/* Logo */}
       <div className="mb-8 mt-4">
-        <Link href="/" className="flex items-center gap-2 font-serif font-bold text-2xl text-zinc-800">
-           LUXE EVENTS
+        <Link href="/" className="flex items-center gap-2">
+           <img src="/logo.png" alt="Events Pro AI Logo" width="180" height="45" className="object-contain" />
         </Link>
       </div>
       
