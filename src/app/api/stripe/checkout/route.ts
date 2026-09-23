@@ -46,8 +46,8 @@ export async function POST(req: Request) {
     }
 
     const stripeSession = await stripe.checkout.sessions.create({
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/billing?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://eventsproai.com.br'}/dashboard?success=true`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://eventsproai.com.br'}/dashboard/billing?canceled=true`,
       payment_method_types: ['card'],
       mode: 'subscription',
       billing_address_collection: 'auto',
