@@ -115,7 +115,12 @@ export default async function DashboardLayout({ children }: { children: ReactNod
       <main className="flex flex-1 flex-col">
         {/* Mobile Header (simplified for now) */}
         <header className="flex h-16 items-center gap-4 border-b border-zinc-100 bg-white px-4 lg:h-[60px] lg:px-6 md:hidden">
-            <MobileNav userRole={userRole} isSuperadmin={isSuperadmin} />
+            <MobileNav 
+              userRole={userRole} 
+              isSuperadmin={isSuperadmin} 
+              userFullName={profile?.full_name || ''} 
+              userEmail={user?.email || ''} 
+            />
             <div className="flex-1 flex justify-center">
               <img src="/logo.png" alt="Events Pro AI" className="h-10 object-contain mr-8" />
             </div>

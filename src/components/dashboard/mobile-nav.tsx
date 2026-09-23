@@ -89,6 +89,23 @@ export function MobileNav({ userRole, isSuperadmin = false }: { userRole: string
             })}
           </nav>
         </div>
+        <div className="mt-auto border-t border-zinc-100 p-6 bg-zinc-50/50">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E4C5BA] text-zinc-900 font-bold shadow-sm ring-2 ring-white">
+              {(userFullName || userEmail || 'U').substring(0, 2).toUpperCase()}
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[15px] font-bold text-zinc-900 truncate max-w-[140px]">{userFullName || 'Usuário'}</span>
+              <span className="text-xs font-semibold text-[#A86F6B] uppercase tracking-wider">{userRole || 'Admin'}</span>
+            </div>
+          </div>
+          <form action="/auth/signout" method="post">
+            <button className="flex w-full items-center justify-center rounded-xl border border-zinc-200 bg-transparent h-11 font-bold text-zinc-600 hover:text-red-600 hover:bg-red-50 hover:border-red-100 transition-colors" type="submit">
+              <LogOut className="mr-2 h-4 w-4 stroke-[2.5px]" />
+              Encerrar Sessão
+            </button>
+          </form>
+        </div>
       </SheetContent>
     </Sheet>
   );
