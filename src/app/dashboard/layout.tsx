@@ -68,7 +68,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
       <aside className="hidden w-72 flex-col border-r border-zinc-100 bg-white md:flex shadow-[4px_0_24px_rgba(0,0,0,0.01)]">
         <div className="flex h-20 items-center px-8 border-b border-zinc-50">
           <Link href="/dashboard" className="flex items-center gap-2.5 text-zinc-900 group">
-            <img src="/logo.jpg" alt="Events Pro AI" className="h-12 object-contain" />
+            <img src="/logo.png" alt="Events Pro AI" className="w-full h-16 object-contain" />
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-6">
@@ -113,7 +113,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         <header className="flex h-16 items-center gap-4 border-b border-zinc-100 bg-white px-4 lg:h-[60px] lg:px-6 md:hidden">
             <MobileNav navItems={navItems} />
             <div className="flex-1 flex justify-center">
-              <img src="/logo.jpg" alt="Events Pro AI" className="h-8 object-contain mix-blend-multiply mr-10" />
+              <img src="/logo.png" alt="Events Pro AI" className="h-10 object-contain mr-8" />
             </div>
           </header>
 

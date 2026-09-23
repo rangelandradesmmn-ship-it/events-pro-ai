@@ -7,7 +7,7 @@ export default function LoginPage() {
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2">
-            <img src="/logo.jpg" alt="Events Pro AI Logo" className="w-[350px] h-auto object-contain mix-blend-multiply -ml-4" />
+            <img src="/logo.png" alt="Events Pro AI Logo" className="w-[350px] h-auto object-contain  -ml-4" />
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">

@@ -27,7 +27,7 @@ export function MobileNav({ navItems }: { navItems: NavItem[] }) {
       <SheetContent side="left" className="w-72 bg-white p-0">
         <div className="flex h-20 items-center px-8 border-b border-zinc-50">
           <Link href="/dashboard" className="flex items-center gap-2.5 text-zinc-900">
-            <img src="/logo.jpg" alt="Events Pro AI" className="h-10 object-contain" />
+            <img src="/logo.png" alt="Events Pro AI" className="w-full h-12 object-contain" />
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-6">
