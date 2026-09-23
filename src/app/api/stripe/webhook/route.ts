@@ -1,10 +1,10 @@
 import { headers } from 'next/headers';
-import { NextResponse } from 'next/navigation';
+import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-24.acacia',
+
 });
 
 // We need the service role key to bypass RLS in the webhook
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session;
 
   if (event.type === 'checkout.session.completed') {
-    const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
+    const subscription = await stripe.subscriptions.retrieve(session.subscription as string) as any;
     const customerId = session.customer as string;
 
     await supabase
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
   }
 
   if (event.type === 'invoice.payment_succeeded') {
-    const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
+    const subscription = await stripe.subscriptions.retrieve(session.subscription as string) as any;
     
     await supabase
       .from('profiles')

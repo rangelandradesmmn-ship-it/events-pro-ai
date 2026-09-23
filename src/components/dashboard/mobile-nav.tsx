@@ -27,7 +27,7 @@ import {
 } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-export function MobileNav({ userRole, isSuperadmin = false }: { userRole: string, isSuperadmin?: boolean }) {
+export function MobileNav({ userRole, isSuperadmin = false, userFullName, userEmail }: { userRole: string, isSuperadmin?: boolean, userFullName?: string, userEmail?: string }) {
   const activeRoles = [userRole, ...(isSuperadmin ? ['superadmin'] : [])];
   const pathname = usePathname();
 
