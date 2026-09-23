@@ -47,6 +47,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
   const allNavItems = [
     { name: 'Configurações', href: '/dashboard/settings', icon: Settings, roles: ['admin'] },
+    { name: 'Assinatura', href: '/dashboard/billing', icon: DollarSign, roles: ['admin'] },
     { name: 'Sala de Comando', href: '/dashboard/super-admin', icon: ShieldAlert, roles: ['superadmin'] },
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: ['admin', 'planner', 'assistant'] },
     { name: 'Eventos', href: '/dashboard/events', icon: Calendar, roles: ['admin', 'planner', 'assistant', 'team'] },
