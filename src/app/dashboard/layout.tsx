@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { 
+import { ShieldAlert,
   Calendar, 
   CalendarDays,
   Users, 
@@ -41,9 +41,12 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     .eq('id', user.id)
     .single();
 
-  const userRole = profile?.role || 'admin'; // fallback to admin if not set
+  const userRole = profile?.role || 'admin';
+  const isSuperadmin = profile?.is_superadmin || false;
+  const activeRoles = [userRole, ...(isSuperadmin ? ['superadmin'] : [])]; // fallback to admin if not set
 
   const allNavItems = [
+    { name: 'Sala de Comando', href: '/dashboard/super-admin', icon: ShieldAlert, roles: ['superadmin'] },
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: ['admin', 'planner', 'assistant'] },
     { name: 'Eventos', href: '/dashboard/events', icon: Calendar, roles: ['admin', 'planner', 'assistant', 'team'] },
     { name: 'Equipe', href: '/dashboard/team', icon: Briefcase, roles: ['admin'] },
@@ -60,7 +63,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     { name: 'Arquivos', href: '/dashboard/files', icon: FolderOpen, roles: ['admin', 'planner', 'assistant'] },
   ];
 
-  const navItems = allNavItems.filter(item => item.roles.includes(userRole));
+  const navItems = allNavItems.filter(item => item.roles.some(r => activeRoles.includes(r)));
 
   return (
     <div className="flex min-h-screen bg-[#FDFDFD]">
@@ -111,7 +114,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
       <main className="flex flex-1 flex-col">
         {/* Mobile Header (simplified for now) */}
         <header className="flex h-16 items-center gap-4 border-b border-zinc-100 bg-white px-4 lg:h-[60px] lg:px-6 md:hidden">
-            <MobileNav userRole={userRole} />
+            <MobileNav userRole={userRole} isSuperadmin={isSuperadmin} />
             <div className="flex-1 flex justify-center">
               <img src="/logo.png" alt="Events Pro AI" className="h-10 object-contain mr-8" />
             </div>

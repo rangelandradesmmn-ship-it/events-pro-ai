@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   Menu,
+  ShieldAlert,
   Calendar, 
   CalendarDays,
   Users, 
@@ -26,10 +27,12 @@ import {
 } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-export function MobileNav({ userRole }: { userRole: string }) {
+export function MobileNav({ userRole, isSuperadmin = false }: { userRole: string, isSuperadmin?: boolean }) {
+  const activeRoles = [userRole, ...(isSuperadmin ? ['superadmin'] : [])];
   const pathname = usePathname();
 
   const allNavItems = [
+    { name: 'Sala de Comando', href: '/dashboard/super-admin', icon: ShieldAlert, roles: ['superadmin'] },
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: ['admin', 'planner', 'assistant'] },
     { name: 'Eventos', href: '/dashboard/events', icon: Calendar, roles: ['admin', 'planner', 'assistant', 'team'] },
     { name: 'Equipe', href: '/dashboard/team', icon: Briefcase, roles: ['admin'] },
@@ -46,7 +49,7 @@ export function MobileNav({ userRole }: { userRole: string }) {
     { name: 'Arquivos', href: '/dashboard/files', icon: FolderOpen, roles: ['admin', 'planner', 'assistant'] },
   ];
 
-  const navItems = allNavItems.filter(item => item.roles.includes(userRole));
+  const navItems = allNavItems.filter(item => item.roles.some(r => activeRoles.includes(r)));
 
   return (
     <Sheet>
