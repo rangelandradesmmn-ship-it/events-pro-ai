@@ -10,10 +10,12 @@ CREATE TABLE IF NOT EXISTS public.team_members (
 ALTER TABLE public.team_members ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Planners can manage their own team members
+DROP POLICY IF EXISTS "Planners can manage team_members" ON public.team_members;
 CREATE POLICY "Planners can manage team_members" ON public.team_members
 FOR ALL USING (planner_id = auth.uid());
 
 -- Policy: Users can view their own team membership
+DROP POLICY IF EXISTS "Users can view their membership" ON public.team_members;
 CREATE POLICY "Users can view their membership" ON public.team_members
 FOR SELECT USING (user_id = auth.uid());
 
@@ -45,37 +47,32 @@ DROP POLICY IF EXISTS "Planners can manage their own events" ON public.events;
 CREATE POLICY "Agency members can manage events" ON public.events
 FOR ALL USING (public.is_in_agency(owner_id));
 
--- Clients
+-- Clientes
 DROP POLICY IF EXISTS "Planners can manage their own clients" ON public.clients;
 CREATE POLICY "Agency members can manage clients" ON public.clients
 FOR ALL USING (public.is_in_agency(planner_id));
 
--- Suppliers
+-- Fornecedores (Suppliers)
 DROP POLICY IF EXISTS "Planners can manage their own suppliers" ON public.suppliers;
 CREATE POLICY "Agency members can manage suppliers" ON public.suppliers
 FOR ALL USING (public.is_in_agency(planner_id));
 
--- Contracts
+-- Contratos (Contracts)
 DROP POLICY IF EXISTS "Planners can manage their own contracts" ON public.contracts;
 CREATE POLICY "Agency members can manage contracts" ON public.contracts
 FOR ALL USING (public.is_in_agency(planner_id));
 
--- Transactions
+-- Transações (Transactions)
 DROP POLICY IF EXISTS "Planners can manage their own transactions" ON public.transactions;
 CREATE POLICY "Agency members can manage transactions" ON public.transactions
 FOR ALL USING (public.is_in_agency(planner_id));
 
--- Checklists
-DROP POLICY IF EXISTS "Planners can manage their own checklists" ON public.checklists;
-CREATE POLICY "Agency members can manage checklists" ON public.checklists
-FOR ALL USING (public.is_in_agency(planner_id));
-
--- Tasks
+-- Tarefas Gerais (Tasks)
 DROP POLICY IF EXISTS "Planners can manage their own tasks" ON public.tasks;
 CREATE POLICY "Agency members can manage tasks" ON public.tasks
 FOR ALL USING (public.is_in_agency(planner_id));
 
--- Guests
+-- Convidados (Guests)
 DROP POLICY IF EXISTS "Planners can manage guests of their events" ON public.guests;
 CREATE POLICY "Agency members can manage guests" ON public.guests
 FOR ALL USING (
@@ -94,5 +91,42 @@ FOR ALL USING (
     SELECT 1 FROM public.clients
     WHERE clients.id = client_files.client_id
     AND public.is_in_agency(clients.planner_id)
+  )
+);
+
+-- =======================================================
+-- UPDATE WEDDINGPRO FEATURES (Tables, Timeline, Checklists)
+-- =======================================================
+
+-- Mesas (Tables)
+DROP POLICY IF EXISTS "Authenticated users can manage tables" ON public.tables;
+CREATE POLICY "Agency members can manage tables" ON public.tables
+FOR ALL USING (
+  EXISTS (
+    SELECT 1 FROM public.events
+    WHERE events.id = tables.event_id
+    AND public.is_in_agency(events.owner_id)
+  )
+);
+
+-- Cronograma (Event Timeline)
+DROP POLICY IF EXISTS "Authenticated users can manage timeline" ON public.event_timeline;
+CREATE POLICY "Agency members can manage timeline" ON public.event_timeline
+FOR ALL USING (
+  EXISTS (
+    SELECT 1 FROM public.events
+    WHERE events.id = event_timeline.event_id
+    AND public.is_in_agency(events.owner_id)
+  )
+);
+
+-- Checklists (Event Checklists)
+DROP POLICY IF EXISTS "Authenticated users can manage checklists" ON public.event_checklists;
+CREATE POLICY "Agency members can manage checklists" ON public.event_checklists
+FOR ALL USING (
+  EXISTS (
+    SELECT 1 FROM public.events
+    WHERE events.id = event_checklists.event_id
+    AND public.is_in_agency(events.owner_id)
   )
 );
