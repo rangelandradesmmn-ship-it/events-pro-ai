@@ -25,7 +25,8 @@ export function PublishButton({ eventId, isPublished }: { eventId: string, isPub
 
   const copyToClipboard = () => {
     if (!portalToken) return;
-    const url = `${window.location.origin}/portal/${portalToken}`;
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://eventsproai.com.br';
+    const url = `${origin}/portal/${portalToken}`;
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

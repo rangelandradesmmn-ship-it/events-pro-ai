@@ -6,7 +6,8 @@ import { Mail } from 'lucide-react';
 import { MessageCircle } from 'lucide-react';
 
 export function ShareContractButtons({ clientName, clientPhone, clientEmail, portalToken, contractTitle }: { clientName: string, clientPhone: string, clientEmail: string, portalToken: string, contractTitle: string }) {
-  const url = `${typeof window !== 'undefined' ? window.location.origin : ''}/portal/${portalToken}`;
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://eventsproai.com.br';
+  const url = `${origin}/portal/${portalToken}`;
   const message = `Olá ${clientName},\n\nO documento "${contractTitle}" já está disponível para sua análise e assinatura digital.\n\nAcesse seu portal exclusivo e seguro através do link abaixo:\n${url}\n\nAtenciosamente,\nLuxe Events.`;
 
   const handleWhatsApp = () => {
