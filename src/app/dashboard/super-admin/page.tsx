@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
+import { createAdminClient } from '@/utils/supabase/admin';
 import { redirect } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building2, Calendar, Users, ShieldAlert } from 'lucide-react';
@@ -8,6 +9,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function SuperAdminPage() {
   const supabase = await createClient();
+  const supabaseAdmin = createAdminClient();
   
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/login');
@@ -24,11 +26,22 @@ export default async function SuperAdminPage() {
   }
 
   // Fetch all agencies (role = admin)
-  const { data: agencies, error: agenciesError } = await supabase
+  const { data: rawAgencies, error: agenciesError } = await supabase
     .from('profiles')
     .select('*')
     .eq('role', 'admin')
     .order('created_at', { ascending: false });
+
+  // Fetch auth users to get emails (since they are not in the profiles table)
+  const { data: authData } = await supabaseAdmin.auth.admin.listUsers();
+  
+  const agencies = rawAgencies?.map(agency => {
+    const authUser = authData?.users.find(u => u.id === agency.id);
+    return {
+      ...agency,
+      email: authUser?.email || ''
+    };
+  });
 
   // Fetch all events across the platform
   const { count: totalEvents } = await supabase
