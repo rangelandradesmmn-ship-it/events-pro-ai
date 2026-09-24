@@ -19,6 +19,7 @@ export default async function InviteTeamPage({ searchParams }: { searchParams: P
   async function handleRealInvite(formData: FormData) {
     'use server';
     
+    const authUser = (await (await createSupabaseServerClient()).auth.getUser()).data.user;
     const email = formData.get('email') as string;
     const name = formData.get('name') as string;
     const role = formData.get('role') as string;
@@ -50,7 +51,7 @@ export default async function InviteTeamPage({ searchParams }: { searchParams: P
       await supabaseAdmin.from('profiles').update({
         full_name: name,
         role: role
-      }).eq('id', inviteData.user.id);
+      }).eq('id', inviteData.user.id); await supabaseAdmin.from('team_members').insert({ planner_id: authUser?.id as string, user_id: inviteData.user.id });
     }
 
     redirect('/dashboard/team?invite=success');
