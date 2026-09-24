@@ -94,9 +94,9 @@ export function SettingsForm({ profile, userId }: { profile: any; userId: string
         <div className="space-y-4">
           <Label>Logo da sua Agência</Label>
           <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-            <div className="h-32 w-48 border-2 border-dashed border-zinc-200 rounded-xl flex items-center justify-center bg-zinc-50 overflow-hidden relative group">
+            <div className="h-40 w-64 border-2 border-dashed border-zinc-200 rounded-xl flex items-center justify-center bg-zinc-50 overflow-hidden relative group">
               {currentLogo ? (
-                <img src={currentLogo} alt="Logo preview" className="max-h-full max-w-full object-contain p-2" />
+                <img src={currentLogo} alt="Logo preview" className="max-h-full max-w-full object-contain" />
               ) : (
                 <div className="flex flex-col items-center text-zinc-400">
                   <ImageIcon className="h-8 w-8 mb-2 opacity-50" />

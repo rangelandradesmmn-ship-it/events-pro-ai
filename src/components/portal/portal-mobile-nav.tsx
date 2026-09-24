@@ -72,7 +72,7 @@ export function PortalMobileNav({
           <div className="flex h-14 items-center border-b border-zinc-800 px-6">
             <Link href={`/portal/${token}`} className="flex flex-col gap-0.5" onClick={() => setOpen(false)}>
               {agencyLogoUrl ? (
-                <img src={agencyLogoUrl} alt={agencyName} className="h-8 object-contain" />
+                <img src={agencyLogoUrl} alt={agencyName} className="h-12 max-w-[200px] object-contain py-1" />
               ) : (
                 <span className="font-serif font-bold text-lg tracking-wide" style={{ color: brandColor }}>{agencyName.toUpperCase()}</span>
               )}
@@ -128,7 +128,7 @@ export function PortalMobileNav({
 
       <div className="flex-1 flex justify-center mr-10">
         {agencyLogoUrl ? (
-          <img src={agencyLogoUrl} alt={agencyName} className="h-6 object-contain" />
+          <img src={agencyLogoUrl} alt={agencyName} className="h-10 max-w-[150px] object-contain py-1" />
         ) : (
           <span className="font-serif font-bold tracking-wide" style={{ color: brandColor }}>{agencyName.toUpperCase()}</span>
         )}

@@ -73,14 +73,27 @@ export default async function ClientPortalLayout({
     { name: 'Notificações', href: `/portal/${token}/notifications`, icon: Bell },
   ];
 
+  const customStyles = {
+    '--color-gold-50': `${brandColor}1A`,
+    '--color-gold-100': `${brandColor}33`,
+    '--color-gold-200': `${brandColor}4D`,
+    '--color-gold-300': `${brandColor}66`,
+    '--color-gold-400': `${brandColor}80`,
+    '--color-gold-500': brandColor,
+    '--color-gold-600': brandColor,
+    '--color-gold-700': brandColor,
+    '--color-gold-800': brandColor,
+    '--color-gold-900': brandColor,
+  } as React.CSSProperties;
+
   return (
-    <div className="flex min-h-screen bg-zinc-50">
+    <div className="flex min-h-screen bg-zinc-50" style={customStyles}>
       {/* Sidebar Desktop */}
       <aside className="hidden w-64 flex-col bg-zinc-900 border-r border-zinc-800 md:flex">
         <div className="flex h-20 items-center border-b border-zinc-800 px-6">
           <Link href={`/portal/${token}`} className="flex flex-col gap-0.5">
             {agencyProfile?.agency_logo_url ? (
-                <img src={agencyProfile.agency_logo_url} alt={agencyName} className="h-10 object-contain" />
+                <img src={agencyProfile.agency_logo_url} alt={agencyName} className="h-14 max-w-[200px] object-contain py-1" />
               ) : (
                 <span className="font-serif font-bold text-xl tracking-wide" style={{ color: brandColor }}>{agencyName.toUpperCase()}</span>
               )}
