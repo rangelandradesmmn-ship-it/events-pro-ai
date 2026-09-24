@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Building2, Calendar, Users, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
+import { SuperAdminActions } from '@/components/dashboard/super-admin-actions';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -118,6 +119,7 @@ export default async function SuperAdminPage() {
                 <th className="px-6 py-4">Contato</th>
                 <th className="px-6 py-4">Status</th>
                 <th className="px-6 py-4">Data de Cadastro</th>
+                <th className="px-6 py-4 text-right">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-50 bg-white">
@@ -139,12 +141,15 @@ export default async function SuperAdminPage() {
                   <td className="px-6 py-4 text-zinc-600 font-medium">
                     {new Date(agency.created_at).toLocaleDateString('pt-BR')}
                   </td>
+                  <td className="px-6 py-4 text-right">
+                    <SuperAdminActions agencyId={agency.id} isPartner={agency.stripe_subscription_id === 'sub_partner_lifetime'} />
+                  </td>
                 </tr>
               ))}
               
               {(!agencies || agencies.length === 0) && (
                 <tr>
-                  <td colSpan={4} className="px-6 py-12 text-center text-zinc-500">
+                  <td colSpan={5} className="px-6 py-12 text-center text-zinc-500">
                     Nenhuma agência encontrada.
                   </td>
                 </tr>
