@@ -1,4 +1,4 @@
-import { createAdminClient as createClient } from '@/utils/supabase/admin';
+﻿import { createAdminClient as createClient } from '@/utils/supabase/admin';
 import { notFound } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { CheckCircle2, Circle, Clock } from 'lucide-react';
@@ -34,13 +34,15 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
     
     journeySteps = steps || [];
     
-    // Count guests for 3D map
-    const { count } = await supabase
+    // Count guests for 3D map including companions
+    const { data: guestsData } = await supabase
       .from('guests')
-      .select('*', { count: 'exact', head: true })
+      .select('companions')
       .eq('event_id', event.id);
       
-    totalGuests = count || 0;
+    if (guestsData && guestsData.length > 0) {
+      totalGuests = guestsData.length + guestsData.reduce((acc, g) => acc + (g.companions || 0), 0);
+    }
   }
 
   const renderJourneyIcon = (status: string) => {
@@ -54,14 +56,14 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8 pb-20">
       <div>
-        <h1 className="text-3xl font-bold text-zinc-900">Visão Geral</h1>
+        <h1 className="text-3xl font-bold text-zinc-900">VisÃ£o Geral</h1>
         <p className="text-muted-foreground mt-1">Acompanhe os detalhes e o progresso do seu evento.</p>
       </div>
 
       {event?.portal_published && totalGuests > 0 && (
         <div className="space-y-4">
           <div className="flex flex-col mb-4">
-            <h2 className="text-2xl font-serif font-bold text-zinc-900">Mapa da Cerimônia</h2>
+            <h2 className="text-2xl font-serif font-bold text-zinc-900">Mapa da CerimÃ´nia</h2>
             <p className="text-zinc-500 text-sm">O mapa de assentos configurado pela sua assessoria.</p>
           </div>
           <CeremonyMapWrapper totalGuests={totalGuests} />
@@ -72,7 +74,7 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
         <Card className="border-zinc-200">
           <CardHeader>
             <CardTitle>Minha Jornada</CardTitle>
-            <CardDescription>O passo a passo da construção do seu sonho.</CardDescription>
+            <CardDescription>O passo a passo da construÃ§Ã£o do seu sonho.</CardDescription>
           </CardHeader>
           <CardContent>
             {journeySteps.length > 0 ? (
@@ -90,7 +92,7 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
                 ))}
               </div>
             ) : (
-              <p className="text-muted-foreground text-sm">Jornada ainda não configurada pelo cerimonial.</p>
+              <p className="text-muted-foreground text-sm">Jornada ainda nÃ£o configurada pelo cerimonial.</p>
             )}
           </CardContent>
         </Card>
@@ -126,3 +128,4 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
     </div>
   );
 }
+

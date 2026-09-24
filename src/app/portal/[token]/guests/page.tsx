@@ -1,4 +1,4 @@
-import { createAdminClient as createClient } from '@/utils/supabase/admin';
+﻿import { createAdminClient as createClient } from '@/utils/supabase/admin';
 import { notFound } from 'next/navigation';
 import { Users, CheckCircle2, Clock, XCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -28,10 +28,10 @@ export default async function PortalGuestsPage({ params }: { params: Promise<{ t
     .eq('event_id', event.id)
     .order('name', { ascending: true });
 
-  const totalGuests = guests?.length || 0;
-  const confirmedCount = guests?.filter(g => g.status === 'confirmed').length || 0;
-  const pendingCount = guests?.filter(g => g.status === 'pending').length || 0;
-  const declinedCount = guests?.filter(g => g.status === 'declined').length || 0;
+  const totalGuests = (guests?.length || 0) + (guests?.reduce((acc, g) => acc + (g.companions || 0), 0) || 0);
+  const confirmedCount = (guests?.filter(g => g.status === 'confirmed').length || 0) + (guests?.filter(g => g.status === 'confirmed').reduce((acc, g) => acc + (g.companions || 0), 0) || 0);
+  const pendingCount = (guests?.filter(g => g.status === 'pending').length || 0) + (guests?.filter(g => g.status === 'pending').reduce((acc, g) => acc + (g.companions || 0), 0) || 0);
+  const declinedCount = (guests?.filter(g => g.status === 'declined').length || 0) + (guests?.filter(g => g.status === 'declined').reduce((acc, g) => acc + (g.companions || 0), 0) || 0);
 
   return (
     <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-8 pb-20">
@@ -48,7 +48,7 @@ export default async function PortalGuestsPage({ params }: { params: Promise<{ t
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-white border border-zinc-100 rounded-2xl p-6 shadow-sm text-center">
           <div className="text-3xl font-bold text-zinc-900">{totalGuests}</div>
-          <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mt-1">Total de Convites</div>
+          <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mt-1">Total de Pessoas</div>
         </div>
         <div className="bg-green-50 border border-green-100 rounded-2xl p-6 shadow-sm text-center">
           <div className="text-3xl font-bold text-green-700">{confirmedCount}</div>
@@ -111,7 +111,7 @@ export default async function PortalGuestsPage({ params }: { params: Promise<{ t
             </div>
             <h3 className="text-lg font-bold text-zinc-900">Nenhum convidado adicionado</h3>
             <p className="text-muted-foreground mt-1 max-w-sm mx-auto">
-              A assessoria ainda não subiu a lista de convidados para o seu evento.
+              A assessoria ainda nÃ£o subiu a lista de convidados para o seu evento.
             </p>
           </div>
         )}
@@ -119,3 +119,4 @@ export default async function PortalGuestsPage({ params }: { params: Promise<{ t
     </div>
   );
 }
+
