@@ -5,6 +5,7 @@ import { FileText, FolderOpen, ExternalLink, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0; // Force Next.js to NEVER cache this page
 
 // Helper to format bytes
 function formatFileSize(bytes: number) {
@@ -18,10 +19,10 @@ function formatFileSize(bytes: number) {
 export default async function FilesPage() {
   const supabase = await createClient();
   
-  // Fetch all files from all clients
+  // Fetch all files from all clients (force inner join to guarantee RLS blocks leak)
   const { data: files, error } = await supabase
     .from('client_files')
-    .select('*, clients(full_name)')
+    .select('*, clients!inner(full_name)')
     .order('created_at', { ascending: false });
     
   if (error) console.error("Erro ao buscar arquivos globais:", error);
@@ -33,7 +34,7 @@ export default async function FilesPage() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Arquivos Globais</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Meus Arquivos</h1>
           <p className="text-muted-foreground mt-1">Repositório de todos os documentos anexados no sistema.</p>
         </div>
       </div>
