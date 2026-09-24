@@ -43,7 +43,7 @@ export default async function ClientPortalLayout({
   // Fetch Agency Profile for White-label
   const { data: agencyProfile } = await supabase
     .from('profiles')
-    .select('full_name, agency_logo_url, agency_color')
+    .select('full_name, agency_logo_url, agency_color, whatsapp')
     .eq('id', client.planner_id)
     .single();
 
@@ -68,7 +68,7 @@ export default async function ClientPortalLayout({
   ];
 
   const helpItems = [
-    { name: 'Fale com o Cerimonial', href: `https://wa.me/550000000000`, icon: MessageCircle },
+    { name: 'Fale com o Cerimonial', href: `https://wa.me/${agencyProfile?.whatsapp || ''}`, icon: MessageCircle },
     { name: 'Notificações', href: `/portal/${token}/notifications`, icon: Bell },
   ];
 
