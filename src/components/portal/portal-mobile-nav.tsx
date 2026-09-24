@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
@@ -14,8 +14,7 @@ import {
   Map, 
   HeartHandshake, 
   FileText, 
-  Image as ImageIcon, 
-  Paperclip, 
+  Image as ImageIcon, Paperclip, 
   MessageCircle, 
   Bell
 } from 'lucide-react';
@@ -44,17 +43,17 @@ export function PortalMobileNav({
   }, [pathname]);
 
   const navItems = [
-    { name: 'Visão Geral', href: `/portal/${token}`, icon: Home },
+    { name: 'VisÃ£o Geral', href: `/portal/${token}`, icon: Home },
     { name: 'Cronograma', href: `/portal/${token}/schedule`, icon: CalendarDays },
     { name: 'Checklist', href: `/portal/${token}/checklist`, icon: CheckSquare },
-    { name: 'Orçamento', href: `/portal/${token}/finance`, icon: DollarSign },
+    { name: 'OrÃ§amento', href: `/portal/${token}/finance`, icon: DollarSign },
     { name: 'Noiva', href: `/portal/${token}/bride`, icon: Users },
     { name: 'Noivo', href: `/portal/${token}/groom`, icon: Users },
     { name: 'Convidados', href: `/portal/${token}/guests`, icon: Users },
     { name: 'Mesas', href: `/portal/${token}/tables`, icon: Map },
     { name: 'Fornecedores', href: `/portal/${token}/suppliers`, icon: HeartHandshake },
     { name: 'Contratos', href: `/portal/${token}/contracts`, icon: FileText },
-    { name: 'Inspirações', href: `/portal/${token}/inspirations`, icon: ImageIcon },
+    { name: 'InspiraÃ§Ãµes', href: `/portal/${token}/inspirations`, icon: ImageIcon },
     { name: 'Documentos', href: `/portal/${token}/documents`, icon: Paperclip },
   ];
 
@@ -135,3 +134,5 @@ export function PortalMobileNav({
     </header>
   );
 }
+
+
