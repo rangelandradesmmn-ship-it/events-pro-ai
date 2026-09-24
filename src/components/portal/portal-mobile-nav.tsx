@@ -60,7 +60,6 @@ export function PortalMobileNav({
 
   const helpItems = [
     { name: 'Fale com o Cerimonial', href: `https://wa.me/${whatsapp || ''}`, icon: MessageCircle },
-    { name: 'Notificações', href: `/portal/${token}/notifications`, icon: Bell },
   ];
 
   return (

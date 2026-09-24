@@ -70,7 +70,6 @@ export default async function ClientPortalLayout({
 
   const helpItems = [
     { name: 'Fale com o Cerimonial', href: `https://wa.me/${agencyProfile?.whatsapp || ''}`, icon: MessageCircle },
-    { name: 'Notificações', href: `/portal/${token}/notifications`, icon: Bell },
   ];
 
   const customStyles = {
