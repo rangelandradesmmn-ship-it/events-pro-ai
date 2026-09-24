@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Trash2, Shield, Loader2 } from 'lucide-react';
 import { deleteTeamMemberAction, updateTeamMemberRoleAction } from '@/app/actions/team';
 
-export function TeamActions({ member }: { member: any }) {
+export function TeamActions({ member, isCurrentUser }: { member: any, isCurrentUser?: boolean }) {
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {

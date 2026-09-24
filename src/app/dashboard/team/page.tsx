@@ -9,13 +9,17 @@ import { TeamActions } from '@/components/dashboard/team-actions';
 export default async function TeamPage() {
   const supabase = await createClient();
   
-  // Fetch profiles that are NOT clients (and exclude self for safety, but we'll just fetch all for now)
-  const { data: teamMembers } = await supabase
-    .from('profiles')
-    .select('*')
-    .neq('role', 'client')
-    .order('role', { ascending: true })
-    .order('full_name', { ascending: true });
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: currentUserProfile } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+  const { data: teamMembersRaw } = await supabase.from('team_members').select('profiles(*)').eq('planner_id', user.id);
+  const invitedMembers = teamMembersRaw?.map((tm: any) => tm.profiles).filter(Boolean) || [];
+  const teamMembers = [currentUserProfile, ...invitedMembers].filter(Boolean).sort((a: any, b: any) => {
+    if (a.id === user.id) return -1;
+    if (b.id === user.id) return 1;
+    return (a.full_name || '').localeCompare(b.full_name || '');
+  });
 
   const getRoleBadge = (role: string) => {
     switch(role) {
@@ -69,7 +73,7 @@ export default async function TeamPage() {
                   </div>
                 )}
                 
-                <TeamActions member={member} />
+                <TeamActions member={member} isCurrentUser={member.id === user.id} />
               </CardContent>
             </Card>
           ))
