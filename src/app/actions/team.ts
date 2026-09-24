@@ -12,19 +12,11 @@ export async function deleteTeamMemberAction(formData: FormData) {
 
   const supabaseAdmin = createAdminClient();
 
-  // 1. Apagar os dados vinculados do usuário (Cascade manual para evitar erros de Foreign Key)
-  await supabaseAdmin.from('guests').delete().eq('planner_id', userId); // if exists
-  await supabaseAdmin.from('tasks').delete().eq('planner_id', userId);
-  await supabaseAdmin.from('checklists').delete().eq('planner_id', userId);
-  await supabaseAdmin.from('transactions').delete().eq('planner_id', userId);
-  await supabaseAdmin.from('contracts').delete().eq('planner_id', userId);
-  await supabaseAdmin.from('suppliers').delete().eq('planner_id', userId);
-  await supabaseAdmin.from('client_files').delete().eq('uploaded_by', userId);
-  await supabaseAdmin.from('clients').delete().eq('planner_id', userId);
-  await supabaseAdmin.from('events').delete().eq('owner_id', userId);
-
-  // 2. Apagar o usuário do Supabase Auth (isso vai apagar o profile automaticamente por CASCADE)
-  const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
+  // REMOVED THE NUCLEAR DELETE!
+  // We only delete the user from the team_members table so they lose access to this agency.
+  // We DO NOT delete their Supabase Auth account because they might be the agency owner themselves,
+  // or they might belong to another agency!
+  const { error } = await supabaseAdmin.from('team_members').delete().eq('user_id', userId);
 
   if (error) {
     return { success: false, error: error.message };
