@@ -132,7 +132,7 @@ export default async function ClientPortalLayout({
 
       {/* Main content */}
       <main className="flex flex-1 flex-col overflow-hidden h-screen">
-<PortalMobileNav navItems={navItems} helpItems={helpItems} agencyName={agencyName} agencyLogoUrl={agencyProfile?.agency_logo_url || null} brandColor={brandColor} token={token} event={event} />
+<PortalMobileNav agencyName={agencyName} agencyLogoUrl={agencyProfile?.agency_logo_url || null} brandColor={brandColor} token={token} event={event} whatsapp={agencyProfile?.whatsapp || ''} />
 
         <div className="flex-1 overflow-y-auto">
           {children}
@@ -141,4 +141,5 @@ export default async function ClientPortalLayout({
     </div>
   );
 }
+
 

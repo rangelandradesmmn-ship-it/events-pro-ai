@@ -4,25 +4,36 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
-import { Menu } from 'lucide-react';
+import { 
+  Menu,
+  Home, 
+  CalendarDays, 
+  CheckSquare, 
+  DollarSign, 
+  Users, 
+  Map, 
+  HeartHandshake, 
+  FileText, 
+  Image as ImageIcon, 
+  Paperclip, 
+  MessageCircle, 
+  Bell
+} from 'lucide-react';
 
 export function PortalMobileNav({ 
-  navItems, 
-  helpItems, 
   agencyName, 
   agencyLogoUrl, 
   brandColor,
   token,
-  event
+  event,
+  whatsapp
 }: { 
-  navItems: any[];
-  helpItems: any[];
   agencyName: string;
   agencyLogoUrl: string | null;
   brandColor: string;
   token: string;
   event: any;
+  whatsapp: string;
 }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -31,6 +42,26 @@ export function PortalMobileNav({
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  const navItems = [
+    { name: 'Visão Geral', href: `/portal/${token}`, icon: Home },
+    { name: 'Cronograma', href: `/portal/${token}/schedule`, icon: CalendarDays },
+    { name: 'Checklist', href: `/portal/${token}/checklist`, icon: CheckSquare },
+    { name: 'Orçamento', href: `/portal/${token}/finance`, icon: DollarSign },
+    { name: 'Noiva', href: `/portal/${token}/bride`, icon: Users },
+    { name: 'Noivo', href: `/portal/${token}/groom`, icon: Users },
+    { name: 'Convidados', href: `/portal/${token}/guests`, icon: Users },
+    { name: 'Mesas', href: `/portal/${token}/tables`, icon: Map },
+    { name: 'Fornecedores', href: `/portal/${token}/suppliers`, icon: HeartHandshake },
+    { name: 'Contratos', href: `/portal/${token}/contracts`, icon: FileText },
+    { name: 'Inspirações', href: `/portal/${token}/inspirations`, icon: ImageIcon },
+    { name: 'Documentos', href: `/portal/${token}/documents`, icon: Paperclip },
+  ];
+
+  const helpItems = [
+    { name: 'Fale com o Cerimonial', href: `https://wa.me/${whatsapp || ''}`, icon: MessageCircle },
+    { name: 'Notificações', href: `/portal/${token}/notifications`, icon: Bell },
+  ];
 
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-zinc-900 px-4 md:hidden">
@@ -105,4 +136,3 @@ export function PortalMobileNav({
     </header>
   );
 }
-
