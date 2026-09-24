@@ -34,7 +34,7 @@ export default async function GroomPage({
     .from('event_partners')
     .select('*')
     .eq('event_id', event.id)
-    .eq('role', 'noivo')
+    .eq('role', 'nãoivo')
     .maybeSingle();
 
   const eventId = event.id;
@@ -46,7 +46,7 @@ export default async function GroomPage({
     
     const payload = {
       event_id: eventId,
-      role: 'noivo',
+      role: 'nãoivo',
       full_name: formData.get('full_name') as string,
       phone: formData.get('phone') as string,
       email: formData.get('email') as string,
@@ -55,7 +55,7 @@ export default async function GroomPage({
       cpf: formData.get('cpf') as string,
       father_name: formData.get('father_name') as string,
       mother_name: formData.get('mother_name') as string,
-      notes: formData.get('notes') as string,
+      nãotes: formData.get('nãotes') as string,
     };
 
     if (groomDataId) {
@@ -146,7 +146,7 @@ export default async function GroomPage({
 
             <div className="space-y-2 md:col-span-2 pt-4 border-t border-zinc-100">
               <label className="text-sm font-semibold text-zinc-900">Observações Adicionais (Restrições alimentares, alergias, local do making of)</label>
-              <textarea name="notes" defaultValue={groomData?.notes || ''} rows={4} className="w-full p-4 border border-zinc-200 rounded-xl bg-zinc-50 focus:bg-white focus:ring-2 focus:ring-[#A86F6B] focus:border-transparent outline-none transition-all"></textarea>
+              <textarea name="nãotes" defaultValue={groomData?.nãotes || ''} rows={4} className="w-full p-4 border border-zinc-200 rounded-xl bg-zinc-50 focus:bg-white focus:ring-2 focus:ring-[#A86F6B] focus:border-transparent outline-none transition-all"></textarea>
             </div>
           </div>
 

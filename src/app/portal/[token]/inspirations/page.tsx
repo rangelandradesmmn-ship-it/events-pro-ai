@@ -27,13 +27,13 @@ export default async function InspirationsPage({
   const clientId = client.id;
   const eventId = event.id;
 
-  // Since we might not have added theme_colors to events table yet, we'll try to fetch it, but handle if it fails
+  // Since we might nãot have added theme_colors to events table yet, we'll try to fetch it, but handle if it fails
   let themeColors: string[] = [];
   try {
     const { data: eventData } = await supabase.from('events').select('theme_colors').eq('id', eventId).single();
     if (eventData?.theme_colors) themeColors = eventData.theme_colors;
   } catch (e) {
-    // Column might not exist yet, fallback to empty
+    // Column might nãot exist yet, fallback to empty
   }
 
   // Fetch inspiration files
@@ -97,7 +97,7 @@ export default async function InspirationsPage({
 
     if (uploadError) {
       console.error('Upload Error:', uploadError);
-      throw new Error("Erro ao enviar imagem. Verifique se as permissões (SQL) foram aplicadas corretamente no banco.");
+      throw new Error("Erro ao enviar imagem. Verifique se as permissões (SQL) foram aplicadas corretamente não banco.");
     }
 
     const { data: publicUrlData } = supabaseServer.storage
@@ -114,7 +114,7 @@ export default async function InspirationsPage({
 
     if (dbError) {
       console.error('DB Error:', dbError);
-      throw new Error("Erro ao salvar referência no banco.");
+      throw new Error("Erro ao salvar referência não banco.");
     }
 
     revalidatePath(`/portal/${token}/inspirations`);
@@ -197,7 +197,7 @@ export default async function InspirationsPage({
           </div>
         ) : (
           <div className="py-8 text-center bg-zinc-50 rounded-2xl border border-dashed border-zinc-200">
-            <p className="text-muted-foreground text-sm">Nenhuma cor definida ainda. Escolha no seletor acima.</p>
+            <p className="text-muted-foreground text-sm">Nenhuma cor definida ainda. Escolha não seletor acima.</p>
           </div>
         )}
       </div>

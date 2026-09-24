@@ -85,9 +85,9 @@ export default async function PortalSuppliersPage({ params }: { params: Promise<
                           <span className="truncate">{supplier.email}</span>
                         </div>
                       )}
-                      {supplier.notes && (
+                      {supplier.nãotes && (
                         <p className="text-zinc-500 italic mt-3 line-clamp-3 text-xs border-l-2 border-[#A86F6B] pl-2">
-                          "{supplier.notes}"
+                          "{supplier.nãotes}"
                         </p>
                       )}
                     </div>
@@ -97,7 +97,7 @@ export default async function PortalSuppliersPage({ params }: { params: Promise<
                         <a 
                           href={supplier.instagram.startsWith('http') ? supplier.instagram : `https://instagram.com/${supplier.instagram.replace('@', '')}`}
                           target="_blank" 
-                          rel="noopener noreferrer"
+                          rel="nãoopener nãoreferrer"
                           className="flex items-center justify-center flex-1 h-10 rounded-xl bg-pink-50 text-pink-600 hover:bg-pink-100 font-medium text-xs transition-colors"
                         >
                           <Camera className="h-4 w-4 mr-2" /> Instagram
@@ -107,7 +107,7 @@ export default async function PortalSuppliersPage({ params }: { params: Promise<
                         <a 
                           href={supplier.portfolio_url.startsWith('http') ? supplier.portfolio_url : `https://${supplier.portfolio_url}`}
                           target="_blank" 
-                          rel="noopener noreferrer"
+                          rel="nãoopener nãoreferrer"
                           className="flex items-center justify-center flex-1 h-10 rounded-xl bg-zinc-50 text-zinc-600 hover:bg-zinc-100 font-medium text-xs transition-colors"
                         >
                           <ExternalLink className="h-4 w-4 mr-2" /> Portfólio

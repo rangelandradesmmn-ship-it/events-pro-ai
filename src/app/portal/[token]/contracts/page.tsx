@@ -141,7 +141,7 @@ export default async function ClientPortalContractsPage({
               {contract.status === 'signed' && contract.signed_at && (
                 <div className="bg-zinc-50 px-6 md:px-8 py-3 border-t border-zinc-100 text-xs text-zinc-500 flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-green-600" />
-                  Assinatura registrada em sistema no dia {new Date(contract.signed_at).toLocaleDateString('pt-BR')} às {new Date(contract.signed_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}.
+                  Assinatura registrada em sistema não dia {new Date(contract.signed_at).toLocaleDateString('pt-BR')} às {new Date(contract.signed_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}.
                 </div>
               )}
             </div>

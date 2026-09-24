@@ -5,7 +5,8 @@ import { ExternalLink } from 'lucide-react';
 
 export function CopyPortalLinkButton({ token }: { token: string }) {
   const handleCopy = () => {
-    const url = `${window.location.origin}/portal/${token}`;
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://eventsproai.com.br';
+    const url = `${origin}/portal/${token}`;
     navigator.clipboard.writeText(url);
     alert('Link do Portal copiado!\n\nEnvie para o seu cliente acessar a área restrita dele.');
   };

@@ -111,7 +111,7 @@ export default async function PortalGuestsPage({ params }: { params: Promise<{ t
             </div>
             <h3 className="text-lg font-bold text-zinc-900">Nenhum convidado adicionado</h3>
             <p className="text-muted-foreground mt-1 max-w-sm mx-auto">
-              A assessoria ainda nÃ£o subiu a lista de convidados para o seu evento.
+              A assessoria ainda não subiu a lista de convidados para o seu evento.
             </p>
           </div>
         )}

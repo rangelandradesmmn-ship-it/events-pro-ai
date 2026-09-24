@@ -63,7 +63,7 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
       {event?.portal_published && totalGuests > 0 && (
         <div className="space-y-4">
           <div className="flex flex-col mb-4">
-            <h2 className="text-2xl font-serif font-bold text-zinc-900">Mapa da CerimÃ´nia</h2>
+            <h2 className="text-2xl font-serif font-bold text-zinc-900">Mapa da Cerimônia</h2>
             <p className="text-zinc-500 text-sm">O mapa de assentos configurado pela sua assessoria.</p>
           </div>
           <CeremonyMapWrapper totalGuests={totalGuests} />
@@ -92,7 +92,7 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
                 ))}
               </div>
             ) : (
-              <p className="text-muted-foreground text-sm">Jornada ainda nÃ£o configurada pelo cerimonial.</p>
+              <p className="text-muted-foreground text-sm">Jornada ainda não configurada pelo cerimonial.</p>
             )}
           </CardContent>
         </Card>

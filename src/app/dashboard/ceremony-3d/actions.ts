@@ -14,7 +14,7 @@ export async function publishToPortalAction(eventId: string) {
     
   if (updateError) {
     console.error("Error publishing event:", updateError);
-    return { success: false, error: 'Erro ao publicar (talvez falte rodar a migração no banco)' };
+    return { success: false, error: 'Erro ao publicar (talvez falte rodar a migração não banco)' };
   }
   
   // Find the client token linked to this event to generate the portal URL

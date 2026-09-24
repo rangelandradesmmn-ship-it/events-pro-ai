@@ -76,7 +76,7 @@ export default async function PortalDocumentsPage({
 
     if (uploadError) {
       console.error('Upload Error:', uploadError);
-      throw new Error("Erro ao enviar documento. Tente novamente.");
+      throw new Error("Erro ao enviar documento. Tente nãovamente.");
     }
 
     const { data: publicUrlData } = supabaseServer.storage
@@ -93,7 +93,7 @@ export default async function PortalDocumentsPage({
 
     if (dbError) {
       console.error('DB Error:', dbError);
-      throw new Error("Erro ao registrar documento no banco.");
+      throw new Error("Erro ao registrar documento não banco.");
     }
 
     revalidatePath(`/portal/${token}/documents`);
@@ -182,7 +182,7 @@ export default async function PortalDocumentsPage({
                   <a 
                     href={doc.file_url} 
                     target="_blank" 
-                    rel="noopener noreferrer"
+                    rel="nãoopener nãoreferrer"
                     className="flex items-center justify-center h-10 px-4 rounded-xl bg-zinc-100 text-zinc-700 hover:bg-zinc-200 font-medium text-sm transition-colors"
                   >
                     <Download className="h-4 w-4 mr-2" /> Baixar

@@ -55,7 +55,7 @@ export default async function ClientPortalLayout({
 
   const navItems = [
     { name: 'Visão Geral', href: `/portal/${token}`, icon: Home },
-    { name: 'Cronograma', href: `/portal/${token}/schedule`, icon: CalendarDays },
+    { name: 'Cronãograma', href: `/portal/${token}/schedule`, icon: CalendarDays },
     { name: 'Checklist', href: `/portal/${token}/checklist`, icon: CheckSquare },
     { name: 'Orçamento', href: `/portal/${token}/finance`, icon: DollarSign },
     { name: 'Noiva', href: `/portal/${token}/bride`, icon: Users },

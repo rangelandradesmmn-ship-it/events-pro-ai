@@ -5,7 +5,8 @@ import { LinkIcon } from 'lucide-react';
 
 export function CopyInviteLinkButton({ token }: { token: string }) {
   const handleCopy = () => {
-    const url = `${window.location.origin}/invite/${token}`;
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://eventsproai.com.br';
+    const url = `${origin}/invite/${token}`;
     navigator.clipboard.writeText(url);
     alert('Link exclusivo copiado! Envie para o convidado via WhatsApp.');
   };

@@ -25,14 +25,14 @@ export function CsvUploader({ eventId, token }: { eventId: string, token: string
       // Converte a planilha para uma matriz de arrays (linhas e colunas)
       const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
       
-      // Pula as linhas até encontrar os dados reais (ignorando títulos e cabeçalhos)
+      // Pula as linhas até encontrar os dados reais (ignãorando títulos e cabeçalhos)
       const guestsToInsert = [];
       for (let i = 0; i < rows.length; i++) {
         const row: any = rows[i];
         if (Array.isArray(row) && row.length > 0 && row[0]) {
           const name = String(row[0]).trim();
           
-          // Ignora se for o título da planilha ou o cabeçalho das colunas
+          // Ignãora se for o título da planilha ou o cabeçalho das colunas
           if (name.toLowerCase().includes('lista de convidados') || name.toLowerCase().includes('nome completo')) {
             continue;
           }

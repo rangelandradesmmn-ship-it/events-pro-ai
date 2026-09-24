@@ -37,7 +37,7 @@ export default async function PortalSchedulePage({ params }: { params: Promise<{
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8 pb-20">
       <div>
-        <h1 className="text-3xl font-bold text-zinc-900">Cronograma do Dia</h1>
+        <h1 className="text-3xl font-bold text-zinc-900">Cronãograma do Dia</h1>
         <p className="text-muted-foreground mt-1">Acompanhe o roteiro completo do seu evento.</p>
       </div>
 
@@ -64,7 +64,7 @@ export default async function PortalSchedulePage({ params }: { params: Promise<{
             <div className="bg-zinc-50 p-6 rounded-full mb-6">
               <Clock className="h-10 w-10 text-zinc-300" />
             </div>
-            <h3 className="text-xl font-bold text-zinc-900 mb-2">Cronograma em andamento</h3>
+            <h3 className="text-xl font-bold text-zinc-900 mb-2">Cronãograma em andamento</h3>
             <p className="text-muted-foreground max-w-md mx-auto">
               Sua assessoria está finalizando os detalhes dos horários do seu grande dia. Volte em breve!
             </p>

@@ -41,7 +41,7 @@ export function PublishButton({ eventId, isPublished }: { eventId: string, isPub
             {copied ? 'Copiado!' : 'Copiar Link'}
           </Button>
         )}
-        <a href={`/portal/${portalToken || 'demo'}`} target="_blank" rel="noreferrer" className="inline-flex">
+        <a href={`/portal/${portalToken || 'demo'}`} target="_blank" rel="nãoreferrer" className="inline-flex">
           <Button className="rounded-full h-11 px-6 font-medium bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 shadow-sm">
             <ExternalLink className="h-4 w-4" />
             Abrir Portal
