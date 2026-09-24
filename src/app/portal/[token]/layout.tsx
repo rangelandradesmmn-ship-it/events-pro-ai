@@ -18,6 +18,7 @@ import {
   Bell
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { PortalMobileNav } from '@/components/portal/portal-mobile-nav';
 
 export default async function ClientPortalLayout({ 
   children,
@@ -131,14 +132,7 @@ export default async function ClientPortalLayout({
 
       {/* Main content */}
       <main className="flex flex-1 flex-col overflow-hidden h-screen">
-        {/* Mobile Header */}
-        <header className="flex h-14 items-center gap-4 border-b bg-zinc-900 px-4 md:hidden">
-           {agencyProfile?.agency_logo_url ? (
-                <img src={agencyProfile.agency_logo_url} alt={agencyName} className="h-6 object-contain" />
-              ) : (
-                <span className="font-serif font-bold tracking-wide" style={{ color: brandColor }}>{agencyName.toUpperCase()}</span>
-              )}
-        </header>
+<PortalMobileNav navItems={navItems} helpItems={helpItems} agencyName={agencyName} agencyLogoUrl={agencyProfile?.agency_logo_url || null} brandColor={brandColor} token={token} event={event} />
 
         <div className="flex-1 overflow-y-auto">
           {children}
@@ -147,3 +141,4 @@ export default async function ClientPortalLayout({
     </div>
   );
 }
+
