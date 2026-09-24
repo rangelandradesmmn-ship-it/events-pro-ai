@@ -2,15 +2,17 @@ import { createClient } from '@/utils/supabase/server';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Plus, Users, CheckCircle2, XCircle, Clock, Trash2 } from 'lucide-react';
+import { Plus, Users, CheckCircle2, XCircle, Clock, Trash2, Search, X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { revalidatePath } from 'next/cache';
 import { CopyInviteLinkButton } from '@/components/rsvp/copy-link-button';
 
-export default async function RsvpPage({ searchParams }: { searchParams: Promise<{ event_id?: string }> }) {
+export default async function RsvpPage({ searchParams }: { searchParams: Promise<{ event_id?: string, q?: string }> }) {
   const supabase = await createClient();
   const resolvedParams = await searchParams;
   const eventId = resolvedParams.event_id;
+  const q = resolvedParams.q;
   
   // Fetch events for the selector
   const { data: events } = await supabase.from('events').select('id, title').order('date');
@@ -19,6 +21,9 @@ export default async function RsvpPage({ searchParams }: { searchParams: Promise
   let query = supabase.from('guests').select('*, events(title)').order('name');
   if (eventId) {
     query = query.eq('event_id', eventId);
+  }
+  if (q) {
+    query = query.ilike('name', `%${q}%`);
   }
   const { data: guests } = await query;
 
@@ -71,23 +76,44 @@ export default async function RsvpPage({ searchParams }: { searchParams: Promise
 
       {/* Event Selector */}
       <Card className="bg-zinc-50 border-dashed">
-        <CardContent className="p-4 flex items-center gap-4">
-          <Users className="h-5 w-5 text-muted-foreground" />
-          <span className="text-sm font-medium">Filtrar por Evento:</span>
-          <div className="flex gap-2 overflow-x-auto pb-1">
-            <Link href="/dashboard/rsvp">
-              <Badge variant={!eventId ? "default" : "outline"} className={!eventId ? "bg-zinc-900" : "bg-white"}>
-                Todos
-              </Badge>
-            </Link>
-            {events?.map(ev => (
-              <Link key={ev.id} href={`/dashboard/rsvp?event_id=${ev.id}`}>
-                <Badge variant={eventId === ev.id ? "default" : "outline"} className={eventId === ev.id ? "bg-zinc-900" : "bg-white"}>
-                  {ev.title}
+        <CardContent className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <Users className="h-5 w-5 text-muted-foreground" />
+            <span className="text-sm font-medium">Filtrar por Evento:</span>
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              <Link href="/dashboard/rsvp">
+                <Badge variant={!eventId ? "default" : "outline"} className={!eventId ? "bg-zinc-900" : "bg-white"}>
+                  Todos
                 </Badge>
               </Link>
-            ))}
+              {events?.map(ev => (
+                <Link key={ev.id} href={`/dashboard/rsvp?event_id=${ev.id}`}>
+                  <Badge variant={eventId === ev.id ? "default" : "outline"} className={eventId === ev.id ? "bg-zinc-900" : "bg-white"}>
+                    {ev.title}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
           </div>
+          <form method="GET" className="flex items-center gap-2 w-full md:w-auto">
+            {eventId && <input type="hidden" name="event_id" value={eventId} />}
+            <div className="relative w-full md:w-64">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input 
+                type="search" 
+                name="q" 
+                placeholder="Buscar convidado..." 
+                defaultValue={q || ""}
+                className="pl-9 bg-white" 
+              />
+            </div>
+            <Button type="submit" variant="secondary">Buscar</Button>
+            {q && (
+              <Link href={`/dashboard/rsvp${eventId ? `?event_id=${eventId}` : ""}`}>
+                <Button variant="ghost" size="icon"><X className="h-4 w-4"/></Button>
+              </Link>
+            )}
+          </form>
         </CardContent>
       </Card>
 
@@ -204,3 +230,5 @@ export default async function RsvpPage({ searchParams }: { searchParams: Promise
     </div>
   );
 }
+
+
