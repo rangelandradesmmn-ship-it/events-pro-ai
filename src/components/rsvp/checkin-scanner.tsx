@@ -65,6 +65,43 @@ export function CheckinScanner() {
       
       {scannerActive && (
         <div className="w-full bg-white rounded-xl overflow-hidden border border-zinc-200 shadow-sm">
+          <style dangerouslySetInnerHTML={{__html: `
+            #reader { border: none !important; }
+            #reader__dashboard_section_csr span { display: none !important; }
+            #reader button { 
+              background-color: #18181b !important; 
+              color: #fcfaf5 !important; 
+              border: none !important; 
+              border-radius: 0.5rem !important; 
+              padding: 0.6rem 1.2rem !important; 
+              font-weight: 600 !important; 
+              cursor: pointer !important; 
+              margin: 0.5rem !important; 
+              box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+              transition: all 0.2s !important;
+            }
+            #reader button:hover { background-color: #27272a !important; transform: translateY(-1px) !important; }
+            #reader select {
+              padding: 0.5rem !important;
+              border-radius: 0.5rem !important;
+              border: 1px solid #e4e4e7 !important;
+              background-color: white !important;
+              margin-bottom: 0.8rem !important;
+              width: 90% !important;
+              max-width: 300px !important;
+              font-size: 0.875rem !important;
+              color: #18181b !important;
+            }
+            #reader a {
+              color: #a86f6b !important;
+              text-decoration: none !important;
+              font-weight: 500 !important;
+              display: inline-block !important;
+              margin-top: 0.5rem !important;
+              padding: 0.5rem !important;
+            }
+            #reader a:hover { text-decoration: underline !important; }
+          `}} />
           <div id="reader" className="w-full"></div>
           <div className="p-4 text-center text-sm text-zinc-500 bg-zinc-50">
             Aponte a câmera para o QR Code do convidado.
@@ -128,3 +165,4 @@ export function CheckinScanner() {
     </div>
   );
 }
+
