@@ -16,6 +16,7 @@ export function SettingsForm({ profile, userId }: { profile: any; userId: string
   const [success, setSuccess] = useState(false);
   const [logoUrl, setLogoUrl] = useState(profile?.agency_logo_url || '');
   const [color, setColor] = useState(profile?.agency_color || '#000000');
+  const [whatsapp, setWhatsapp] = useState(profile?.whatsapp || '');
   const [previewFile, setPreviewFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -59,6 +60,7 @@ export function SettingsForm({ profile, userId }: { profile: any; userId: string
         .update({
           agency_logo_url: finalLogoUrl,
           agency_color: color,
+          whatsapp: whatsapp,
         })
         .eq('id', userId);
 
@@ -67,46 +69,43 @@ export function SettingsForm({ profile, userId }: { profile: any; userId: string
       setSuccess(true);
       setPreviewFile(null);
       router.refresh();
-
-    } catch (error) {
-      console.error('Error saving settings:', error);
-      alert('Ocorreu um erro ao salvar as configurações.');
+    } catch (err) {
+      console.error(err);
+      alert('Erro ao salvar as configurações.');
     } finally {
       setLoading(false);
     }
   };
 
+  const currentLogo = previewUrl || logoUrl;
+
   return (
-    <Card className="border-zinc-100 shadow-sm">
-      <CardHeader>
-        <CardTitle>Identidade Visual</CardTitle>
+    <Card className="border-zinc-200 shadow-sm">
+      <CardHeader className="bg-zinc-50 border-b border-zinc-100 pb-6 rounded-t-xl">
+        <CardTitle>Identidade Visual e Contato</CardTitle>
         <CardDescription>
-          Personalize a experiência dos seus clientes. A logo e cor escolhidas aparecerão no Portal dos Noivos.
+          Personalize a experiência dos seus clientes. A logo, a cor e o WhatsApp escolhidos aparecerão no Portal do Cliente.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8">
+      <CardContent className="p-6 space-y-8">
         
         {/* Logo Upload */}
         <div className="space-y-4">
           <Label>Logo da sua Agência</Label>
-          <div className="flex flex-col md:flex-row gap-6 items-start">
-            <div className="h-32 w-48 bg-zinc-50 border-2 border-dashed border-zinc-200 rounded-xl flex items-center justify-center overflow-hidden relative">
-              {previewUrl || logoUrl ? (
-                <img 
-                  src={previewUrl || logoUrl} 
-                  alt="Sua logo" 
-                  className="w-full h-full object-contain p-2"
-                />
+          <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+            <div className="h-32 w-48 border-2 border-dashed border-zinc-200 rounded-xl flex items-center justify-center bg-zinc-50 overflow-hidden relative group">
+              {currentLogo ? (
+                <img src={currentLogo} alt="Logo preview" className="max-h-full max-w-full object-contain p-2" />
               ) : (
                 <div className="flex flex-col items-center text-zinc-400">
-                  <ImageIcon className="h-8 w-8 mb-2" />
+                  <ImageIcon className="h-8 w-8 mb-2 opacity-50" />
                   <span className="text-xs font-medium">Nenhuma logo</span>
                 </div>
               )}
             </div>
 
-            <div className="flex-1 space-y-2 w-full">
-              <Label htmlFor="logo-upload" className="cursor-pointer">
+            <div className="flex-1 space-y-2">
+              <Label htmlFor="logo-upload" className="cursor-pointer inline-block">
                 <div className="inline-flex items-center justify-center rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-bold text-zinc-50 hover:bg-zinc-900/90 w-full md:w-auto">
                   <Upload className="mr-2 h-4 w-4" />
                   Escolher arquivo...
@@ -131,24 +130,42 @@ export function SettingsForm({ profile, userId }: { profile: any; userId: string
             <Input 
               type="color" 
               value={color} 
-              onChange={(e) => setColor(e.target.value)}
+              onChange={(e) => { setColor(e.target.value); setSuccess(false); }}
               className="h-12 w-24 p-1 cursor-pointer rounded-lg"
             />
             <Input 
               type="text" 
               value={color} 
-              onChange={(e) => setColor(e.target.value)}
+              onChange={(e) => { setColor(e.target.value); setSuccess(false); }}
               className="w-32 uppercase font-mono"
             />
           </div>
           <p className="text-xs text-zinc-500">Usada em botões e pequenos detalhes no portal.</p>
         </div>
 
+        {/* WhatsApp */}
+        <div className="space-y-4">
+          <Label htmlFor="whatsapp">WhatsApp de Contato (Botão do Portal)</Label>
+          <div className="flex items-center gap-4">
+            <Input 
+              id="whatsapp"
+              type="text" 
+              placeholder="Ex: 5511999999999"
+              value={whatsapp} 
+              onChange={(e) => { setWhatsapp(e.target.value); setSuccess(false); }}
+              className="max-w-md h-12"
+            />
+          </div>
+          <p className="text-xs text-zinc-500">
+            Digite apenas números, incluindo o código do país (Ex: 55 para o Brasil). O cliente será direcionado para este número ao clicar em "Fale com o Cerimonial".
+          </p>
+        </div>
+
         {/* Save Button */}
         <div className="pt-4 border-t border-zinc-100 flex items-center gap-4">
           <Button 
             onClick={handleSave} 
-            disabled={loading || (!previewFile && color === profile?.agency_color)}
+            disabled={loading || (!previewFile && color === profile?.agency_color && whatsapp === profile?.whatsapp)}
             className="rounded-xl h-12 px-8 font-bold"
           >
             {loading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : null}
