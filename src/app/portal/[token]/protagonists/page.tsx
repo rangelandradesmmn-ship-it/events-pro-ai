@@ -56,7 +56,7 @@ export default async function ProtagonistsPage({
       mother_name: formData.get('mother_name') as string,
     };
 
-    if (partnerId && partnerId !== 'new') {
+    if (partnerId && !partnerId.startsWith('new')) {
       await supabaseServer.from('event_partners').update(payload).eq('id', partnerId);
     } else {
       await supabaseServer.from('event_partners').insert({ ...payload, event_id: eventId });
@@ -70,7 +70,7 @@ export default async function ProtagonistsPage({
     'use server';
     const supabaseServer = await createClient();
     const partnerId = formData.get('partner_id') as string;
-    if (partnerId && partnerId !== 'new') {
+    if (partnerId && !partnerId.startsWith('new')) {
       await supabaseServer.from('event_partners').delete().eq('id', partnerId);
     }
     revalidatePath(`/portal/${token}/protagonists`);
@@ -110,7 +110,20 @@ export default async function ProtagonistsPage({
     defaultRole = 'Aniversariante'; 
   }
 
-  const displayPartners = partners && partners.length > 0 ? partners : [{ id: 'new', role: defaultRole }];
+  const displayPartners = partners && partners.length > 0 ? [...partners] : [];
+
+  if (displayPartners.length === 0) {
+    if (event.type === 'Casamento') {
+      displayPartners.push({ id: 'new_1', role: 'Noiva' });
+      displayPartners.push({ id: 'new_2', role: 'Noivo' });
+    } else {
+      displayPartners.push({ id: 'new_1', role: defaultRole });
+    }
+  } else if (event.type === 'Casamento' && displayPartners.length === 1) {
+    const existingRole = displayPartners[0].role?.toLowerCase() || '';
+    const newRole = existingRole.includes('noiva') ? 'Noivo' : 'Noiva';
+    displayPartners.push({ id: 'new_2', role: newRole });
+  }
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8 pb-20">
@@ -137,7 +150,7 @@ export default async function ProtagonistsPage({
       <div className="space-y-8">
         {displayPartners.map((partner, index) => (
           <div key={partner.id || index} className="bg-white border border-zinc-100 rounded-[32px] p-6 md:p-10 shadow-sm relative">
-            {partner.id !== 'new' && (
+            {!String(partner.id).startsWith('new') && (
               <form action={deletePartner} className="absolute top-6 right-6 md:top-10 md:right-10">
                 <input type="hidden" name="partner_id" value={partner.id} />
                 <button type="submit" className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors" title="Remover pessoa">
@@ -210,16 +223,14 @@ export default async function ProtagonistsPage({
           </div>
         ))}
         
-        {displayPartners.length > 0 && displayPartners[0].id !== 'new' && (
-          <div className="flex justify-center mt-8">
-            <form action={addPartner}>
-              <Button type="submit" variant="outline" className="rounded-full border-2 border-zinc-200 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-50 h-12 px-6 font-semibold transition-all">
-                <Plus className="h-5 w-5 mr-2" />
-                Adicionar mais uma pessoa
-              </Button>
-            </form>
-          </div>
-        )}
+        <div className="flex justify-center mt-8">
+          <form action={addPartner}>
+            <Button type="submit" variant="outline" className="rounded-full border-2 border-zinc-200 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-50 h-12 px-6 font-semibold transition-all">
+              <Plus className="h-5 w-5 mr-2" />
+              Adicionar mais uma pessoa
+            </Button>
+          </form>
+        </div>
       </div>
     </div>
   );
