@@ -23,7 +23,7 @@ export default async function Ceremony3DPage() {
     .limit(1);
 
   const nearestEvent = events && events.length > 0 ? events[0] : null;
-  let totalGuests = 96; // Default fallback to match the screenshot text "96 assentos"
+  let totalGuests = 0; // Se não houver eventos, mostra 0 assentos
 
   if (nearestEvent) {
     // Attempt to count guests for this event
