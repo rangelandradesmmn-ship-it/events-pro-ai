@@ -38,12 +38,14 @@ export function TeamActions({ member }: { member: any }) {
   return (
     <div className="flex w-full gap-2 mt-4 pt-4 border-t">
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="w-full text-xs h-8" disabled={loading}>
-            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Shield className="mr-2 h-4 w-4" />}
-            Permissões
-          </Button>
-        </DropdownMenuTrigger>
+        <div>
+          <DropdownMenuTrigger className="w-full">
+            <Button variant="outline" size="sm" className="w-full text-xs h-8" disabled={loading}>
+              {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Shield className="mr-2 h-4 w-4" />}
+              Permissões
+            </Button>
+          </DropdownMenuTrigger>
+        </div>
         <DropdownMenuContent align="start">
           <DropdownMenuLabel>Alterar Cargo</DropdownMenuLabel>
           <DropdownMenuSeparator />
