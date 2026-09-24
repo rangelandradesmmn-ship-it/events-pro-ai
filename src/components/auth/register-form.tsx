@@ -114,7 +114,7 @@ export function RegisterForm() {
             id="email" 
             name="email" 
             type="email" 
-            placeholder="(22) 9999-9999" // Matching the screenshot's odd placeholder for email though it looks like phone, let's put standard email placeholder instead
+            placeholder="exemplo@email.com"
             value={formData.email}
             onChange={handleChange}
             required 

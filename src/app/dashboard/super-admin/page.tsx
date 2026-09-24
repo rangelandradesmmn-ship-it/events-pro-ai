@@ -41,7 +41,8 @@ export default async function SuperAdminPage() {
     const authUser = authData?.users.find(u => u.id === agency.id);
     return {
       ...agency,
-      email: authUser?.email || ''
+      email: authUser?.email || '',
+      phone: agency.phone || authUser?.user_metadata?.phone || agency.whatsapp || ''
     };
   });
 
