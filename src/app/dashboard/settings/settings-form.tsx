@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Upload, Loader2, CheckCircle2, Image as ImageIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { updateSettingsAction } from '@/app/actions/settings';
 
 export function SettingsForm({ profile, userId }: { profile: any; userId: string }) {
   const router = useRouter();
@@ -54,17 +55,17 @@ export function SettingsForm({ profile, userId }: { profile: any; userId: string
         setLogoUrl(finalLogoUrl);
       }
 
-      // 2. Update profile
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .update({
-          agency_logo_url: finalLogoUrl,
-          agency_color: color,
-          whatsapp: whatsapp,
-        })
-        .eq('id', userId);
+      // 2. Update profile using Server Action to bypass RLS
+      const formData = new FormData();
+      formData.append('logoUrl', finalLogoUrl);
+      formData.append('color', color);
+      formData.append('whatsapp', whatsapp);
 
-      if (updateError) throw updateError;
+      const result = await updateSettingsAction(formData);
+
+      if (!result.success) {
+        throw new Error(result.error);
+      }
 
       setSuccess(true);
       setPreviewFile(null);
