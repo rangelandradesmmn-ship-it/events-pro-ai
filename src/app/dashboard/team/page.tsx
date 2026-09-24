@@ -84,19 +84,8 @@ export default async function TeamPage() {
         )}
       </div>
 
-      <Card className="mt-4 bg-gold-50 border-gold-200">
-        <CardContent className="p-6 flex gap-4 items-start">
-          <div className="p-2 bg-gold-100 rounded-full text-gold-700">
-            <User className="h-6 w-6" />
-          </div>
-          <div>
-            <h4 className="font-semibold text-zinc-900 mb-1">Como funcionam os convites?</h4>
-            <p className="text-sm text-zinc-700">
-              Futuramente, ao clicar em "Convidar Membro", o sistema enviará um e-mail mágico para o seu funcionário. Ele criará uma senha e já entrará no sistema com as restrições que você definir (ex: Assistentes não podem ver o módulo Financeiro).
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+      
     </div>
   );
 }
+
