@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -14,6 +14,7 @@ export function RegisterForm() {
   const supabase = createClient();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -56,6 +57,8 @@ export function RegisterForm() {
       router.refresh();
     }
   };
+
+  if (success) return <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-sm border border-zinc-100 text-center"><div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6"><svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"></path></svg></div><h2 className="text-2xl font-bold text-zinc-900 mb-2">Verifique seu e-mail</h2><p className="text-zinc-600 mb-6">Enviamos um link de confirmação para <strong>{formData.email}</strong>. Por favor, clique no link para ativar sua conta.</p><p className="text-sm text-zinc-500">Se não encontrar o e-mail, verifique sua caixa de spam.</p></div>;
 
   return (
     <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-sm border border-zinc-100">
@@ -139,7 +142,7 @@ export function RegisterForm() {
               id="password" 
               name="password" 
               type={showPassword ? "text" : "password"} 
-              placeholder="••••••••••"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               value={formData.password}
               onChange={handleChange}
               required 
