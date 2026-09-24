@@ -4,11 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Mail, Phone, ShieldCheck, User } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { TeamActions } from '@/components/dashboard/team-actions';
 
 export default async function TeamPage() {
   const supabase = await createClient();
   
-  // Fetch profiles that are NOT clients
+  // Fetch profiles that are NOT clients (and exclude self for safety, but we'll just fetch all for now)
   const { data: teamMembers } = await supabase
     .from('profiles')
     .select('*')
@@ -68,11 +69,7 @@ export default async function TeamPage() {
                   </div>
                 )}
                 
-                <div className="flex gap-2 mt-4 pt-4 border-t">
-                  <Button variant="outline" size="sm" className="w-full text-xs h-8">
-                    Alterar Permissões
-                  </Button>
-                </div>
+                <TeamActions member={member} />
               </CardContent>
             </Card>
           ))
