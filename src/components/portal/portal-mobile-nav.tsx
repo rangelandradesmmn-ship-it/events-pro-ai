@@ -43,7 +43,7 @@ export function PortalMobileNav({
   }, [pathname]);
 
   const navItems = [
-    { name: 'VisÃ£o Geral', href: `/portal/${token}`, icon: Home },
+    { name: 'Visão Geral', href: `/portal/${token}`, icon: Home },
     { name: 'Cronãograma', href: `/portal/${token}/schedule`, icon: CalendarDays },
     { name: 'Checklist', href: `/portal/${token}/checklist`, icon: CheckSquare },
     { name: 'OrÃ§amento', href: `/portal/${token}/finance`, icon: DollarSign },

@@ -71,7 +71,7 @@ export function UnassignedList({ unassignedGuests, tables, assignGuest }: { unas
               <svg className="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
             </div>
             <p className="text-sm font-bold text-zinc-900">Tudo organizado!</p>
-            <p className="text-xs text-zinc-500 mt-1">Todos os convidados confirmados jÃ¡ possuem mesa.</p>
+            <p className="text-xs text-zinc-500 mt-1">Todos os convidados confirmados já possuem mesa.</p>
           </div>
         )}
       </div>

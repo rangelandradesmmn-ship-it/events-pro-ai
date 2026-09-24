@@ -56,7 +56,7 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8 pb-20">
       <div>
-        <h1 className="text-3xl font-bold text-zinc-900">VisÃ£o Geral</h1>
+        <h1 className="text-3xl font-bold text-zinc-900">Visão Geral</h1>
         <p className="text-muted-foreground mt-1">Acompanhe os detalhes e o progresso do seu evento.</p>
       </div>
 
@@ -74,7 +74,7 @@ export default async function ClientPortalHomePage({ params }: { params: Promise
         <Card className="border-zinc-200">
           <CardHeader>
             <CardTitle>Minha Jornada</CardTitle>
-            <CardDescription>O passo a passo da construÃ§Ã£o do seu sonho.</CardDescription>
+            <CardDescription>O passo a passo da construção do seu sonho.</CardDescription>
           </CardHeader>
           <CardContent>
             {journeySteps.length > 0 ? (
