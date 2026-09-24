@@ -38,14 +38,13 @@ export function TeamActions({ member }: { member: any }) {
   return (
     <div className="flex w-full gap-2 mt-4 pt-4 border-t">
       <DropdownMenu>
-        <div>
-          <DropdownMenuTrigger className="w-full">
-            <Button variant="outline" size="sm" className="w-full text-xs h-8" disabled={loading}>
-              {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Shield className="mr-2 h-4 w-4" />}
-              Permissões
-            </Button>
-          </DropdownMenuTrigger>
-        </div>
+        <DropdownMenuTrigger 
+          disabled={loading}
+          className="flex h-8 items-center justify-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-900 hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50 w-full"
+        >
+          {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Shield className="mr-2 h-4 w-4" />}
+          Permissões
+        </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuLabel>Alterar Cargo</DropdownMenuLabel>
           <DropdownMenuSeparator />
