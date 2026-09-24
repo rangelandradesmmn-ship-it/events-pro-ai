@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://eventsproai.com.br"),
   title: "Events Pro AI | Gestão Completa para Assessorias de Eventos",
   description: "A plataforma definitiva para gerenciar casamentos e eventos. Ferramentas premium para organizar e encantar clientes com Portal White-label.",
   openGraph: {

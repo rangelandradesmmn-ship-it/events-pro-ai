@@ -75,7 +75,7 @@ export default async function Ceremony3DPage() {
         {/* Left Side: Explanations */}
         <div className="lg:col-span-4 space-y-8">
           <p className="text-zinc-600 text-[15px] leading-relaxed">
-            A mesma lista que você colou não passo 2 vira o mapa de assentos sozinha — lado da nãoiva, lado do nãoivo, fileira por fileira. Você ajusta o que quiser arrastando, e o casal abre o portal e vê exatamente onde cada convidado vai sentar.
+            A mesma lista que você colou não passo 2 vira o mapa de assentos sozinha — lado da noiva, lado do noivo, fileira por fileira. Você ajusta o que quiser arrastando, e o casal abre o portal e vê exatamente onde cada convidado vai sentar.
           </p>
 
           <div className="space-y-6">

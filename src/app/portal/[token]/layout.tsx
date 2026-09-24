@@ -53,13 +53,17 @@ export default async function ClientPortalLayout({
 
   const event = client.events && client.events.length > 0 ? client.events[0] : null;
 
+  let honoreesLabel = 'Homenageados';
+  if (event?.type === 'Casamento') honoreesLabel = 'Noivos';
+  else if (event?.type === 'Formatura') honoreesLabel = 'Formandos';
+  else if (event?.type === 'Aniversário' || event?.type === 'Festa Infantil') honoreesLabel = 'Aniversariantes';
+
   const navItems = [
     { name: 'Visão Geral', href: `/portal/${token}`, icon: Home },
-    { name: 'Cronãograma', href: `/portal/${token}/schedule`, icon: CalendarDays },
+    { name: 'Cronograma', href: `/portal/${token}/schedule`, icon: CalendarDays },
     { name: 'Checklist', href: `/portal/${token}/checklist`, icon: CheckSquare },
     { name: 'Orçamento', href: `/portal/${token}/finance`, icon: DollarSign },
-    { name: 'Noiva', href: `/portal/${token}/bride`, icon: Users },
-    { name: 'Noivo', href: `/portal/${token}/groom`, icon: Users },
+    { name: honoreesLabel, href: `/portal/${token}/protagonists`, icon: Users },
     { name: 'Convidados', href: `/portal/${token}/guests`, icon: Users },
     { name: 'Mesas', href: `/portal/${token}/tables`, icon: Map },
     { name: 'Fornecedores', href: `/portal/${token}/suppliers`, icon: HeartHandshake },
