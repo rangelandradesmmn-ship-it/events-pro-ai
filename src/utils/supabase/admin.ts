@@ -9,6 +9,11 @@ export function createAdminClient() {
       auth: {
         autoRefreshToken: false,
         persistSession: false
+      },
+      global: {
+        fetch: (url, options) => {
+          return fetch(url, { ...options, cache: 'no-store' });
+        }
       }
     }
   );
