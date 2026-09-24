@@ -38,7 +38,7 @@ export default async function InviteTeamPage({ searchParams }: { searchParams: P
 
     // 1. Invita o usuário via Auth Admin
     const { data: inviteData, error: inviteError } = await supabaseAdmin.auth.admin.inviteUserByEmail(email, {
-      data: { full_name: name, role: role }
+      data: { full_name: name, role: role }, redirectTo: (process.env.NEXT_PUBLIC_SITE_URL || 'https://eventsproai.com.br') + '/auth/callback'
     });
 
     if (inviteError) {
