@@ -47,7 +47,7 @@ export default async function Ceremony3DPage() {
           </div>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-zinc-900 tracking-tight">
             Você cadastrou os convidados. <br/>
-            <span className="text-[#A86F6B] italic">O mapa da cerimÃ´nia já está pronto.</span>
+            <span className="text-[#A86F6B] italic">O mapa da cerimônia já está pronto.</span>
           </h1>
         </div>
         <div className="flex gap-3">
@@ -75,7 +75,7 @@ export default async function Ceremony3DPage() {
         {/* Left Side: Explanations */}
         <div className="lg:col-span-4 space-y-8">
           <p className="text-zinc-600 text-[15px] leading-relaxed">
-            A mesma lista que você colou não passo 2 vira o mapa de assentos sozinha — lado da nãoiva, lado do nãoivo, fileira por fileira. Você ajusta o que quiser arrastando, e o casal abre o portal e vÃª exatamente onde cada convidado vai sentar.
+            A mesma lista que você colou não passo 2 vira o mapa de assentos sozinha — lado da nãoiva, lado do nãoivo, fileira por fileira. Você ajusta o que quiser arrastando, e o casal abre o portal e vê exatamente onde cada convidado vai sentar.
           </p>
 
           <div className="space-y-6">
