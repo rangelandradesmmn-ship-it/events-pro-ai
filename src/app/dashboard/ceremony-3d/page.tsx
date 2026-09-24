@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server';
+﻿import { createClient } from '@/utils/supabase/server';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Users, Download, Rotate3D } from 'lucide-react';
@@ -8,7 +8,7 @@ import { PublishButton } from './publish-button';
 import CeremonyMapWrapper from '@/components/3d/ceremony-map-wrapper';
 
 export const metadata = {
-  title: 'Mapa da Cerimônia 3D | LUXE EVENTS',
+  title: 'Mapa da CerimÃ´nia 3D | LUXE EVENTS',
 };
 
 export default async function Ceremony3DPage() {
@@ -23,17 +23,16 @@ export default async function Ceremony3DPage() {
     .limit(1);
 
   const nearestEvent = events && events.length > 0 ? events[0] : null;
-  let totalGuests = 0; // Se não houver eventos, mostra 0 assentos
+  let totalGuests = 0;
 
   if (nearestEvent) {
-    // Attempt to count guests for this event
-    const { count } = await supabase
+    const { data: guestsData } = await supabase
       .from('guests')
-      .select('*', { count: 'exact', head: true })
+      .select('companions')
       .eq('event_id', nearestEvent.id);
       
-    if (count !== null && count > 0) {
-      totalGuests = count;
+    if (guestsData && guestsData.length > 0) {
+      totalGuests = guestsData.length + guestsData.reduce((acc, g) => acc + (g.companions || 0), 0);
     }
   }
 
@@ -44,11 +43,11 @@ export default async function Ceremony3DPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="uppercase text-[11px] font-bold tracking-widest text-[#A86F6B]">A entrega que o casal não espera</span>
+            <span className="uppercase text-[11px] font-bold tracking-widest text-[#A86F6B]">A entrega que o casal nÃ£o espera</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-zinc-900 tracking-tight">
-            Você cadastrou os convidados. <br/>
-            <span className="text-[#A86F6B] italic">O mapa da cerimônia já está pronto.</span>
+            VocÃª cadastrou os convidados. <br/>
+            <span className="text-[#A86F6B] italic">O mapa da cerimÃ´nia jÃ¡ estÃ¡ pronto.</span>
           </h1>
         </div>
         <div className="flex gap-3">
@@ -76,7 +75,7 @@ export default async function Ceremony3DPage() {
         {/* Left Side: Explanations */}
         <div className="lg:col-span-4 space-y-8">
           <p className="text-zinc-600 text-[15px] leading-relaxed">
-            A mesma lista que você colou no passo 2 vira o mapa de assentos sozinha — lado da noiva, lado do noivo, fileira por fileira. Você ajusta o que quiser arrastando, e o casal abre o portal e vê exatamente onde cada convidado vai sentar.
+            A mesma lista que vocÃª colou no passo 2 vira o mapa de assentos sozinha â€” lado da noiva, lado do noivo, fileira por fileira. VocÃª ajusta o que quiser arrastando, e o casal abre o portal e vÃª exatamente onde cada convidado vai sentar.
           </p>
 
           <div className="space-y-6">
@@ -91,14 +90,14 @@ export default async function Ceremony3DPage() {
               <CheckCircle2 className="h-5 w-5 text-[#A86F6B] shrink-0" />
               <div>
                 <strong className="text-sm text-zinc-900 block mb-0.5">2D para trabalhar, 3D para encantar</strong>
-                <span className="text-sm text-zinc-500">a mesma informação nas duas vistas.</span>
+                <span className="text-sm text-zinc-500">a mesma informaÃ§Ã£o nas duas vistas.</span>
               </div>
             </div>
             <div className="flex gap-3">
               <CheckCircle2 className="h-5 w-5 text-[#A86F6B] shrink-0" />
               <div>
-                <strong className="text-sm text-zinc-900 block mb-0.5">Você decide quando publicar</strong>
-                <span className="text-sm text-zinc-500">fica em rascunho até estar do seu jeito.</span>
+                <strong className="text-sm text-zinc-900 block mb-0.5">VocÃª decide quando publicar</strong>
+                <span className="text-sm text-zinc-500">fica em rascunho atÃ© estar do seu jeito.</span>
               </div>
             </div>
           </div>
@@ -134,3 +133,4 @@ function CheckCircle2(props: any) {
     </svg>
   );
 }
+
